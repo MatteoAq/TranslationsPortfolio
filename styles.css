@@ -129,3 +129,36 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
 .service-icon-loaders{width:68px}
 @media(max-width:1350px){.quick-nav{display:none}.mobile-dock{display:grid}.site-footer{padding-bottom:72px}}
 @media(max-width:600px){.hero-art{height:305px}.hero-stack-card{padding:12px;min-height:83px}.hero-stack-card strong{font-size:14px}.hero-stack-card span{font-size:11px}.hero h1{white-space:normal}.mobile-dock a{font-size:10px}.contact-section{margin-bottom:90px}}
+
+/* v5: uniform, icon-only loader tile with built-in three-second CSS rotation */
+.service-icon-loaders{width:58px!important;height:58px!important;padding:0!important;overflow:hidden}
+.service-icon-loaders .loader-stack{position:relative;width:100%;height:100%;overflow:visible}
+.service-icon-loaders .loader-badge,.service-icon-loaders .loader-badge.active,.service-icon-loaders .loader-stack[data-direction] .loader-badge{
+ position:absolute;inset:0!important;width:100%;height:100%;display:flex;justify-content:center;align-items:center;
+ padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0;
+ opacity:0;transform:translateY(10px) scale(.94);transition:none!important;animation:loader-carousel-v5 9s linear infinite
+}
+.service-icon-loaders .loader-badge:nth-child(1){animation-delay:0s}
+.service-icon-loaders .loader-badge:nth-child(2){animation-delay:-6s}
+.service-icon-loaders .loader-badge:nth-child(3){animation-delay:-3s}
+.service-icon-loaders .loader-brand-icon{display:block;width:43px!important;height:43px!important;max-width:43px!important;max-height:43px!important;object-fit:contain!important;flex:none}
+.service-icon-loaders .brand-fallback{width:39px;height:39px}
+@keyframes loader-carousel-v5{
+ 0%{opacity:0;transform:translateY(10px) scale(.94)}
+ 3%{opacity:1;transform:translate(0,0) scale(1)}
+ 28%{opacity:1;transform:translate(0,0) scale(1)}
+ 33%{opacity:0;transform:translateX(-10px) scale(.94)}
+ 100%{opacity:0;transform:translateX(10px) scale(.94)}
+}
+.rtf-platform-links{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:15px}
+.rtf-platform-link{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:10px 14px;border-radius:10px;border:1px solid rgba(219,134,251,.28);background:rgba(180,108,255,.07);font-size:12px;font-weight:800;color:#eecff6}
+.rtf-platform-link:hover{border-color:rgba(219,134,251,.56);background:rgba(180,108,255,.15)}
+.rtf-platform-link img{width:20px;height:20px;object-fit:contain;flex:none}
+.rtf-platform-link span{color:#f37bd0}
+.card-downloads{margin:0 0 13px!important;padding:8px 10px;width:fit-content;border:1px solid rgba(230,151,243,.2);background:rgba(185,109,213,.10);border-radius:8px;display:flex;align-items:center;gap:7px;flex-wrap:nowrap}
+.card-downloads strong{font-size:17px!important;font-variant-numeric:tabular-nums;white-space:nowrap;color:#f9c4ff!important}
+.card-downloads small,.card-downloads span:last-child{font-size:10px;color:#c9b4d4;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){
+ .service-icon-loaders .loader-badge{animation:none!important;opacity:0!important;transform:none!important}
+ .service-icon-loaders .loader-badge:first-child{opacity:1!important}
+}
