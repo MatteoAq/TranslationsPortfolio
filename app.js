@@ -92,6 +92,8 @@ const projects = [
     source:'https://www.curseforge.com/minecraft/modpacks/beyond-depth',color:['#5f3f7a','#211c38'],abbr:'BD'
   }
 ];
+const restoredCovers={"Whispers in the Void":"https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg","The Winter Rescue":"https://i.imgur.com/QYhDakk.jpeg","Society: Sunlit Valley":"https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png","Create: Stranded at Sea":"https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png","Lucky World Invasion":"https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg"};
+for(const p of projects){p.img=restoredCovers[p.name]||p.img;}
 projects.sort((a,b)=>(b.downloads||0)-(a.downloads||0));
 
 
@@ -203,7 +205,7 @@ function applyStaticTranslations(){
 }
 
 function cardMarkup(p, i){
-  const img = p.img ? `<img loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" onerror="this.style.display='none'">` : ''; 
+  const img = p.img ? `<img class="cover-photo" loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" onerror="this.style.display='none'">` : ''; 
   return `<article class="project-card" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}">
       <div class="card-cover"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${img}<span class="cover-label">${escapeHtml(t('card_label'))}</span></div>
       <div class="card-body">
