@@ -14,6 +14,7 @@
   <script src="./app.js" defer></script>
 </head>
 <body>
+<nav class="quick-nav" aria-label="Quick navigation"><a href="#top" data-section-link="top" data-i18n="quick_home">Home</a><a href="#work" data-section-link="work" data-i18n="quick_projects">Projects</a><a href="#approach" data-section-link="approach" data-i18n="quick_focus">Focus</a><a href="#about" data-section-link="about" data-i18n="quick_about">About</a><a href="#contact" data-section-link="contact" data-i18n="quick_contact">Contact</a></nav>
   <a class="skip-link" href="#work">Skip to projects</a>
   <div class="site-shell" id="top">
     <header class="site-header container">
@@ -48,18 +49,18 @@
 
           </div>
         </div>
-        <div class="hero-art" aria-label="Minecraft pack illustrations">
+        <div class="hero-art" aria-hidden="true">
           <div class="hero-glow"></div>
-          <div class="hero-main-shot image-panel"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" alt="Create: Stranded at Sea official illustration" fetchpriority="high"></div>
-          <div class="hero-small-shot image-panel"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" alt="Whispers in the Void official illustration"></div>
-          <div class="hero-caption" data-i18n="hero_caption">OFFICIAL PACK ART / CURSEFORGE</div>
+          <div class="hero-stack-card hero-stack-a"><strong>Beyond Depth</strong><span>3.32M ↓</span></div>
+          <div class="hero-stack-card hero-stack-b"><strong>Dread Reborn</strong><span>2.40M ↓</span></div>
+          <div class="hero-stack-card hero-stack-c"><strong>Lucky World Invasion</strong><span>2.20M ↓</span></div>
         </div>
       </section>
 
       <section class="projects section container" id="work" aria-labelledby="work-title">
         <div class="section-head">
           <div>
-            <div class="section-overline"><span class="section-index">01</span> <span data-i18n="portfolio_overline">PORTFOLIO</span></div>
+            <div class="section-overline"><span data-i18n="portfolio_overline">PORTFOLIO</span></div>
             <h2 id="work-title" data-i18n-html="work_title">Projects I <span>worked on.</span></h2>
 
           </div>
@@ -84,54 +85,30 @@
           <p data-i18n="empty_desc">Try another name or reset the filter.</p>
           <button type="button" id="reset-filters" data-i18n="empty_reset">Show all projects</button>
         </div>
-        <div class="project-footnote"><span class="small-outline-dot"></span> <span data-i18n="project_footnote">Images are from public galleries of the original modpacks.</span></div>
-      </section>
-
-      <section class="section gallery-section" aria-labelledby="gallery-title">
-        <div class="container">
-          <div class="section-head compact">
-            <div>
-              <div class="section-overline"><span class="section-index">02</span> <span data-i18n="gallery_overline">IN GAME</span></div>
-              <h2 id="gallery-title" data-i18n-html="gallery_title">Different packs. <span>One language goal.</span></h2>
-  
-            </div>
-            <div class="gallery-arrows">
-              <button type="button" class="gallery-btn" id="gallery-prev" aria-label="Previous images">←</button>
-              <button type="button" class="gallery-btn" id="gallery-next" aria-label="Next images">→</button>
-            </div>
-          </div>
-          <div class="gallery-track" id="gallery-track" tabindex="0" aria-label="Pack gallery">
-            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" loading="lazy" alt="Whispers in the Void"><figcaption><span>WHISPERS IN THE VOID</span><a href="https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
-            <figure class="gallery-card"><img src="https://i.imgur.com/QYhDakk.jpeg" loading="lazy" alt="The Winter Rescue"><figcaption><span>THE WINTER RESCUE</span><a href="https://www.curseforge.com/minecraft/modpacks/the-winter-rescue/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
-            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" loading="lazy" alt="Create: Stranded at Sea"><figcaption><span>CREATE: STRANDED AT SEA</span><a href="https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
-            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png" loading="lazy" alt="Society: Sunlit Valley"><figcaption><span>SOCIETY: SUNLIT VALLEY</span><a href="https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
-          </div>
-        </div>
+        
       </section>
 
       <section class="section container" id="approach" aria-labelledby="approach-title">
         <div class="section-head compact-text">
           <div>
-            <div class="section-overline"><span class="section-index">03</span> <span data-i18n="approach_overline">WHAT I DO</span></div>
+            <div class="section-overline"><span data-i18n="approach_overline">WHAT I DO</span></div>
             <h2 id="approach-title" data-i18n-html="approach_title">What exactly <span>I localize.</span></h2>
 
           </div>
         </div>
         <div class="services-grid">
           <article class="service">
-            <span class="service-num">/ 01</span>
             <div class="service-icon service-icon-loaders" aria-label="Fabric, Forge, NeoForge">
               <div class="loader-stack" id="loader-stack" data-direction="vertical">
-                <span class="loader-badge active loader-fabric"><img src="https://raw.githubusercontent.com/FabricMC/community/main/media/unascribed/png/fabric.png" alt="" loading="lazy"><span>Fabric</span></span>
-                <span class="loader-badge loader-forge"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/26.3/forge_installer_logo.png" alt="" loading="lazy"><span>Forge</span></span>
-                <span class="loader-badge loader-neoforge"><img src="https://raw.githubusercontent.com/neoforged/.github/main/art/neoforge_logo.png" alt="" loading="lazy"><span>NeoForge</span></span>
-              </div>
+              <span class="loader-badge active loader-fabric" title="Fabric"><img src="https://raw.githubusercontent.com/FabricMC/community/main/media/unascribed/png/fabric.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+              <span class="loader-badge loader-forge" title="Forge"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/26.3/forge_installer_logo.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+              <span class="loader-badge loader-neoforge" title="NeoForge"><img src="https://raw.githubusercontent.com/neoforged/.github/main/art/neoforge_logo.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+            </div>
             </div>
             <h3 data-i18n="service_mods_title">Mods and items</h3>
             <p data-i18n="service_mods_desc">Names, tooltips and consistent terminology.</p>
           </article>
           <article class="service">
-            <span class="service-num">/ 02</span>
             <div class="service-icon icon-illustrated" aria-label="FTB Quests">
               <img class="mod-icon pixel-art" src="https://raw.githubusercontent.com/FTBTeam/FTB-Quests/main/common/src/main/resources/assets/ftbquests/textures/item/book.png" alt="FTB Quests" loading="lazy">
             </div>
@@ -139,7 +116,6 @@
             <p data-i18n="service_quests_desc">Questbooks, guides and long-form in-game text.</p>
           </article>
           <article class="service">
-            <span class="service-num">/ 03</span>
             <div class="service-icon icon-illustrated" aria-label="FancyMenu">
               <img class="mod-icon" src="https://raw.githubusercontent.com/Keksuccino/FancyMenu/master/assets/fancymenu_glyph_128x128.png" alt="FancyMenu" loading="lazy">
             </div>
@@ -147,7 +123,6 @@
             <p data-i18n="service_ui_desc">FancyMenu screens, HUDs and text-heavy UI pieces.</p>
           </article>
           <article class="service">
-            <span class="service-num">/ 04</span>
             <div class="service-icon icon-illustrated" aria-label="KubeJS">
               <img class="mod-icon" src="https://raw.githubusercontent.com/kube-mods/kubejs/2601/src/main/resources/kubejs_logo.png" alt="KubeJS" loading="lazy">
             </div>
@@ -161,7 +136,7 @@
         <div class="about-card">
           <div class="about-symbol" aria-hidden="true">s<span>.</span></div>
           <div class="about-content">
-            <div class="section-overline"><span class="section-index">04</span> <span data-i18n="about_overline">ABOUT</span></div>
+            <div class="section-overline"><span data-i18n="about_overline">ABOUT</span></div>
             <h2 id="about-title" data-i18n-html="about_title">Sheiny <span>– Minecraft localization.</span></h2>
             <p data-i18n="about_desc">I work on Russian localization for Minecraft projects, mostly modpacks and related UI.</p>
             <div class="rtf-proof">
@@ -174,7 +149,7 @@
 
       <section class="contact-section container" id="contact" aria-labelledby="contact-title">
         <div>
-          <div class="section-overline"><span class="section-index">05</span> <span data-i18n="contact_overline">CONTACT</span></div>
+          <div class="section-overline"><span data-i18n="contact_overline">CONTACT</span></div>
           <h2 id="contact-title" data-i18n-html="contact_title">Need Russian <span>localization?</span></h2>
           <p data-i18n="contact_desc">Telegram or Discord – both are fine.</p>
           <div class="contact-actions">
@@ -201,5 +176,6 @@
     <button class="dialog-close" id="dialog-close" type="button" aria-label="Close">×</button>
     <div id="dialog-content"></div>
   </dialog>
+<nav class="mobile-dock" aria-label="Quick navigation"><a href="#top" data-section-link="top" data-i18n="quick_home">Home</a><a href="#work" data-section-link="work" data-i18n="quick_projects">Projects</a><a href="#approach" data-section-link="approach" data-i18n="quick_focus">Focus</a><a href="#about" data-section-link="about" data-i18n="quick_about">About</a><a href="#contact" data-section-link="contact" data-i18n="quick_contact">Contact</a></nav>
 </body>
 </html>
