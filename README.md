@@ -1,30 +1,13 @@
 # Sheiny – Minecraft localization portfolio
 
-Компактный сайт-портфолио переводов Minecraft.
+**Published in the repository root for GitHub Pages.** Contains 15 Minecraft modpacks and localized RU/EN UI.
 
-## Что внутри
+Data: total downloads of original packs on CurseForge, snapshot on October 11, 2026, sorted descending. Counts are not translation downloads; they are static and should be reviewed periodically.
 
-- 15 сборок из личного списка переводов
-- автоподбор языка сайта: русский / английский
-- фильтры и поиск по проектам
-- короткие карточки без лишнего текста
-- блок направлений локализации
-- упоминание переводов в RTF Extension
-- контакты Telegram и Discord
+The catalog removes unverified external image URLs and inaccessible Telegram `kennnyscrin` deep links. Actual before/after screenshots require a publicly accessible gallery or source files; they are not fabricated. External links from cards point to the original CurseForge pack pages.
 
-## Публикация
+The Dread Reborn item is mapped to Arrenek's DREAD – A Horror Survival Pack, which publishes a DREAD REBORN version, rather than the similarly named independent project by maxim529.
 
-Для GitHub Pages достаточно включить:
+Loader icons reference upstream logos from FabricMC, MinecraftForge and NeoForged, with no accompanying names. UI includes desktop quick navigation and a mobile bottom dock.
 
-- **Settings → Pages**
-- **Deploy from a branch**
-- ветка **main**
-- папка **/(root)**
-
-Адрес после публикации:
-
-`https://matteoaq.github.io/TranslationsPortfolio/`
-
-## Авторские иконки
-
-Используются оригинальные ассеты из репозиториев FabricMC, MinecraftForge, NeoForged, FTBTeam, Keksuccino/FancyMenu и kube-mods/KubeJS. Изображения подключаются по исходным URL GitHub, без изменения логотипов. Все права на обозначения и изображения остаются у правообладателей. NeoForged art: CC BY 4.0 (Ridanisaurus), см. исходный репозиторий. Лицензии других проектов и ассетов могут отличаться.
+GitHub Pages: Settings → Pages → Deploy from a branch → main → /(root).
