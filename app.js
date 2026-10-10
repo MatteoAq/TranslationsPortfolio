@@ -1,68 +1,320 @@
 'use strict';
 
-// Every entry below corresponds to the 15 names supplied by Sheiny.
-// Categories describe the pack's broad theme, not the translation's QA status.
-// Public images come from original modpack galleries, not translated screenshots.
 const projects = [
-  {name:'Whispers in the Void',theme:'survival',genre:'Хоррор / выживание',desc:'Атмосферная хоррор-сборка с опасными существами, исследованием и заданиями.',img:'https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg',source:'https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery',color:['#352345','#131925'],abbr:'W'},
-  {name:'The Winter Rescue',theme:'survival',genre:'Зимнее выживание',desc:'Выживание в холодном мире с техникой, обогревом и развитием поселения.',img:'https://i.imgur.com/QYhDakk.jpeg',source:'https://www.curseforge.com/minecraft/modpacks/the-winter-rescue/gallery',translationShots:'https://t.me/kennnyscrin/29',color:['#65819a','#263145'],abbr:'W'},
-  {name:'Solo Leveling: OVERLOAD',theme:'adventure',genre:'RPG / прокачка',desc:'Ролевая сборка по мотивам Solo Leveling с навыками, уровнями и особыми интерфейсами.',translationShots:'https://t.me/kennnyscrin/28',color:['#672f83','#251539'],abbr:'SL'},
-  {name:'Society: Sunlit Valley',theme:'cozy',genre:'Фермерство / развитие',desc:'Сборка про развитие, хозяйство, исследования и долгую игровую прогрессию.',img:'https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png',source:'https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery',color:['#745c4d','#272033'],abbr:'SV'},
-  {name:'Project Genesis',theme:'survival',genre:'Выживание',desc:'Проект из каталога переводов. Подробности конкретного переведённого выпуска уточняются.',color:['#4c304b','#17222c'],abbr:'PG'},
-  {name:'Over Stars',theme:'tech',genre:'Технологии / RPG',desc:'Технологическая прогрессия и приключения, объединённые квестовой системой.',translationShots:'https://t.me/kennnyscrin/21',color:['#394882','#171530'],abbr:'OS'},
-  {name:'Opolis Inc',theme:'tech',genre:'Технологии',desc:'Сборка с упором на технологии и последовательное развитие.',color:['#465b72','#1b2638'],abbr:'OI'},
-  {name:'Lucky World Invasion',theme:'survival',genre:'Выживание / события',desc:'Неожиданные события, счастливые блоки и защита от вторжений.',img:'https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg',source:'https://minecraft.fr/lucky-world-invasion-modpack-minecraft/',translationShots:'https://t.me/kennnyscrin/43',color:['#b45f67','#4a2d63'],abbr:'LW'},
-  {name:'Life in the village 4',theme:'cozy',genre:'Строительство / поселения',desc:'Развитие поселения, управление колонией и исследование мира.',translationShots:'https://t.me/kennnyscrin/10',color:['#71564e','#293b32'],abbr:'LV'},
-  {name:"waccyy's Fantasia",theme:'adventure',genre:'Фэнтези / приключения',desc:'Фэнтезийный мир, исследование и приключения.',translationShots:'https://t.me/kennnyscrin/5',color:['#715587','#2a2046'],abbr:'WF'},
-  {name:'Dread Reborn',theme:'survival',genre:'Хоррор / выживание',desc:'Мрачная сборка с угрозами, хоррор-атмосферой и выживанием.',translationShots:'https://t.me/kennnyscrin/47',color:['#543647','#1b161e'],abbr:'DR'},
-  {name:'Create: Stranded at Sea',theme:'tech',genre:'Create / выживание',desc:'Приключения и автоматизация в океаническом мире с развитой системой прогрессии.',img:'https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png',source:'https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea',translationShots:'https://t.me/kennnyscrin/2',color:['#50428b','#1e213e'],abbr:'CS'},
-  {name:'Create: Mekanized',theme:'tech',genre:'Create / Mekanism',desc:'Развитие производств, автоматизация и технологии Create вместе с Mekanism.',translationShots:'https://t.me/kennnyscrin/51',color:['#696251','#26283b'],abbr:'CM'},
-  {name:'CABIN: Above and Beyond newer',theme:'tech',genre:'Create / технологии',desc:'Развитие технологий и производственных цепочек в сборке на основе Create.',color:['#736246','#30263e'],abbr:'CA'},
-  {name:'Beyond Depth',theme:'adventure',genre:'Исследование / приключения',desc:'Приключения, исследование мира и новых измерений.',translationShots:'https://t.me/kennnyscrin/100',color:['#5f3f7a','#211c38'],abbr:'BD'}
+  {
+    name:'Whispers in the Void',theme:'survival',
+    genre:{ru:'Хоррор / выживание',en:'Horror / survival'},
+    desc:{ru:'Мрачная хоррор-сборка с выживанием и исследованием.',en:'Dark horror-focused pack with survival and exploration.'},
+    img:'https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg',source:'https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery',color:['#352345','#131925'],abbr:'W'
+  },
+  {
+    name:'The Winter Rescue',theme:'survival',
+    genre:{ru:'Зимнее выживание',en:'Winter survival'},
+    desc:{ru:'Холодный мир, обогрев, техника и выживание.',en:'Cold-world survival with heating, tech and progression.'},
+    img:'https://i.imgur.com/QYhDakk.jpeg',source:'https://www.curseforge.com/minecraft/modpacks/the-winter-rescue/gallery',translationShots:'https://t.me/kennnyscrin/29',color:['#65819a','#263145'],abbr:'W'
+  },
+  {
+    name:'Solo Leveling: OVERLOAD',theme:'adventure',
+    genre:{ru:'RPG / прокачка',en:'RPG / progression'},
+    desc:{ru:'Ролевая сборка с прокачкой, уровнями и особыми интерфейсами.',en:'RPG-oriented pack with skills, levels and custom interfaces.'},
+    translationShots:'https://t.me/kennnyscrin/28',color:['#672f83','#251539'],abbr:'SL'
+  },
+  {
+    name:'Society: Sunlit Valley',theme:'cozy',
+    genre:{ru:'Фермерство / развитие',en:'Farming / progression'},
+    desc:{ru:'Фермерство, развитие базы и долгая прогрессия.',en:'Farming, base growth and long-term progression.'},
+    img:'https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png',source:'https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery',color:['#745c4d','#272033'],abbr:'SV'
+  },
+  {
+    name:'Project Genesis',theme:'survival',
+    genre:{ru:'Выживание',en:'Survival'},
+    desc:{ru:'Сборка из каталога переводов с выживанием и исследованием.',en:'A survival-oriented entry from the translation catalog.'},
+    color:['#4c304b','#17222c'],abbr:'PG'
+  },
+  {
+    name:'Over Stars',theme:'tech',
+    genre:{ru:'Технологии / RPG',en:'Tech / RPG'},
+    desc:{ru:'Технологическая прогрессия, квесты и приключения.',en:'Technology progression mixed with quests and adventure.'},
+    translationShots:'https://t.me/kennnyscrin/21',color:['#394882','#171530'],abbr:'OS'
+  },
+  {
+    name:'Opolis Inc',theme:'tech',
+    genre:{ru:'Технологии',en:'Technology'},
+    desc:{ru:'Технологическая сборка с поэтапным развитием.',en:'Technology pack with staged progression.'},
+    img:'https://media.forgecdn.net/attachments/954/66/opolis_inc_1.png',source:'https://www.curseforge.com/minecraft/modpacks/opolis-inc/gallery',color:['#465b72','#1b2638'],abbr:'OI'
+  },
+  {
+    name:'Lucky World Invasion',theme:'survival',
+    genre:{ru:'Выживание / события',en:'Survival / events'},
+    desc:{ru:'События, вторжения и необычное выживание.',en:'Event-driven survival with invasions and surprises.'},
+    img:'https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg',source:'https://minecraft.fr/lucky-world-invasion-modpack-minecraft/',translationShots:'https://t.me/kennnyscrin/43',color:['#b45f67','#4a2d63'],abbr:'LW'
+  },
+  {
+    name:'Life in the village 4',theme:'cozy',
+    genre:{ru:'Строительство / поселения',en:'Building / settlements'},
+    desc:{ru:'Развитие поселения и управление колонией.',en:'Village growth and colony management.'},
+    translationShots:'https://t.me/kennnyscrin/10',color:['#71564e','#293b32'],abbr:'LV'
+  },
+  {
+    name:"waccyy's Fantasia",theme:'adventure',
+    genre:{ru:'Фэнтези / приключения',en:'Fantasy / adventure'},
+    desc:{ru:'Фэнтезийное приключение с исследованием мира.',en:'Fantasy adventure with world exploration.'},
+    translationShots:'https://t.me/kennnyscrin/5',color:['#715587','#2a2046'],abbr:'WF'
+  },
+  {
+    name:'Dread Reborn',theme:'survival',
+    genre:{ru:'Хоррор / выживание',en:'Horror / survival'},
+    desc:{ru:'Мрачная атмосфера, угрозы и выживание.',en:'A dark survival pack with horror atmosphere.'},
+    translationShots:'https://t.me/kennnyscrin/47',color:['#543647','#1b161e'],abbr:'DR'
+  },
+  {
+    name:'Create: Stranded at Sea',theme:'tech',
+    genre:{ru:'Create / выживание',en:'Create / survival'},
+    desc:{ru:'Океанический мир, Create и продуманная прогрессия.',en:'Ocean survival with Create and structured progression.'},
+    img:'https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png',source:'https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea',translationShots:'https://t.me/kennnyscrin/2',color:['#50428b','#1e213e'],abbr:'CS'
+  },
+  {
+    name:'Create: Mekanized',theme:'tech',
+    genre:{ru:'Create / Mekanism',en:'Create / Mekanism'},
+    desc:{ru:'Автоматизация и развитие производств.',en:'Automation and factory progression.'},
+    translationShots:'https://t.me/kennnyscrin/51',color:['#696251','#26283b'],abbr:'CM'
+  },
+  {
+    name:'CABIN: Above and Beyond newer',theme:'tech',
+    genre:{ru:'Create / технологии',en:'Create / tech'},
+    desc:{ru:'Технологическая сборка на основе Create.',en:'Create-based technology progression pack.'},
+    color:['#736246','#30263e'],abbr:'CA'
+  },
+  {
+    name:'Beyond Depth',theme:'adventure',
+    genre:{ru:'Исследование / приключения',en:'Exploration / adventure'},
+    desc:{ru:'Исследование мира и приключения.',en:'World exploration and adventure.'},
+    img:'https://i.ytimg.com/vi/yBai9purmjQ/maxresdefault.jpg',source:'https://www.curseforge.com/minecraft/modpacks/beyond-depth',translationShots:'https://t.me/kennnyscrin/100',color:['#5f3f7a','#211c38'],abbr:'BD'
+  }
 ];
 
-const grid = document.getElementById('project-grid');
-const search = document.getElementById('project-search');
-const count = document.getElementById('count-label');
-const noResults = document.getElementById('empty-state');
-const dialog = document.getElementById('project-dialog');
-const dialogContent = document.getElementById('dialog-content');
-let activeFilter = 'all';
+const UI = {
+  ru: {
+    metaTitle:'Sheiny – переводы Minecraft',
+    htmlLang:'ru',
+    nav_projects:'Проекты', nav_approach:'Что я делаю', nav_about:'Обо мне', header_contact:'Написать',
+    hero_eyebrow:'НЕЗАВИСИМЫЙ ЛОКАЛИЗАТОР MINECRAFT',
+    hero_title:'Чтобы Minecraft говорил <em>по-русски.</em>',
+    hero_desc:'Перевожу модпаки, моды, квесты и интерфейсы на русский язык.',
+    hero_action_primary:'Посмотреть работы', hero_action_secondary:'Что локализую',
+    stat_projects:'сборок в портфолио', stat_rtf:'свои переводы', stat_lang:'автовыбор языка',
+    floating_title:'Не просто замена слов.', floating_desc:'Термины, контекст и нормальный русский.', hero_caption:'ОФИЦИАЛЬНЫЕ ИЛЛЮСТРАЦИИ СБОРОК / CURSEFORGE',
+    portfolio_overline:'ПОРТФОЛИО', work_title:'Сборки, над которыми <span>я работал.</span>', work_desc:'Переводы для KennnyMC.',
+    search_placeholder:'Найти сборку...', filter_all:'Все', filter_adventure:'Приключения', filter_tech:'Технологии', filter_survival:'Выживание', filter_cozy:'Уютные',
+    empty_title:'Ничего не найдено.', empty_desc:'Попробуйте другое название или сбросьте фильтр.', empty_reset:'Показать все проекты',
+    project_footnote:'Иллюстрации взяты из публичных галерей оригинальных сборок.',
+    gallery_overline:'В ИГРЕ', gallery_title:'Разные сборки. <span>Одна цель.</span>', gallery_desc:'Несколько иллюстраций из сборок в портфолио.', source_link:'Источник ↗',
+    approach_overline:'ЧТО Я ДЕЛАЮ', approach_title:'Что именно <span>я локализую.</span>', approach_desc:'Не только lang-файлы.',
+    service_mods_title:'Моды и предметы', service_mods_desc:'Названия, подсказки и единая терминология.',
+    service_quests_title:'Квесты и книги', service_quests_desc:'Квестбуки, руководства и большой игровой текст.',
+    service_ui_title:'Интерфейсы', service_ui_desc:'FancyMenu, HUD и другие текстовые элементы UI.',
+    service_code_title:'KubeJS и нестандартные случаи', service_code_desc:'Скрипты, динамические названия и строки вне lang-файлов.',
+    about_overline:'ОБО МНЕ', about_title:'Sheiny <span>– локализация Minecraft.</span>', about_desc:'Занимаюсь русской локализацией Minecraft-проектов: в основном сборок и связанных интерфейсов.',
+    rtf_title:'RTF Extension', rtf_desc:'У меня также есть свои переводы в RTF Extension.',
+    contact_overline:'СВЯЗЬ', contact_title:'Нужна русская <span>локализация?</span>', contact_desc:'Можно написать в Telegram или Discord.', copy_label:'Копировать',
+    footer_text:'Портфолио локализации Minecraft · 2026', footer_top:'Наверх ↑',
+    card_label:'Перевод для KennnyMC', card_status:'Русская локализация', card_more:'Подробнее ↗',
+    dialog_contribution:'Мой вклад:', dialog_contribution_text:'работа над русской локализацией для KennnyMC.',
+    dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Иллюстрации оригинальной сборки ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
+  },
+  en: {
+    metaTitle:'Sheiny – Minecraft localization',
+    htmlLang:'en',
+    nav_projects:'Projects', nav_approach:'What I do', nav_about:'About', header_contact:'Contact',
+    hero_eyebrow:'INDEPENDENT MINECRAFT LOCALIZER',
+    hero_title:'Making Minecraft speak <em>Russian.</em>',
+    hero_desc:'I localize modpacks, mods, quests and interfaces for Russian-speaking players.',
+    hero_action_primary:'View projects', hero_action_secondary:'What I localize',
+    stat_projects:'projects in portfolio', stat_rtf:'own translations', stat_lang:'auto language',
+    floating_title:'More than raw text replacement.', floating_desc:'Terms, context and cleaner Russian.', hero_caption:'OFFICIAL PACK ART / CURSEFORGE',
+    portfolio_overline:'PORTFOLIO', work_title:'Projects I <span>worked on.</span>', work_desc:'Translations made for KennnyMC.',
+    search_placeholder:'Find a project...', filter_all:'All', filter_adventure:'Adventure', filter_tech:'Tech', filter_survival:'Survival', filter_cozy:'Cozy',
+    empty_title:'Nothing found.', empty_desc:'Try another name or reset the filter.', empty_reset:'Show all projects',
+    project_footnote:'Images are taken from public galleries of the original modpacks.',
+    gallery_overline:'IN GAME', gallery_title:'Different packs. <span>One language goal.</span>', gallery_desc:'A few visuals from the packs in this portfolio.', source_link:'Source ↗',
+    approach_overline:'WHAT I DO', approach_title:'What exactly <span>I localize.</span>', approach_desc:'Not just lang files.',
+    service_mods_title:'Mods and items', service_mods_desc:'Names, tooltips and consistent terminology.',
+    service_quests_title:'Quests and books', service_quests_desc:'Questbooks, guides and long-form in-game text.',
+    service_ui_title:'Interfaces', service_ui_desc:'FancyMenu screens, HUDs and other text-heavy UI pieces.',
+    service_code_title:'KubeJS and custom cases', service_code_desc:'Scripts, dynamic names and text outside lang files.',
+    about_overline:'ABOUT', about_title:'Sheiny <span>– Minecraft localization.</span>', about_desc:'I work on Russian localization for Minecraft projects, mostly modpacks and related UI.',
+    rtf_title:'RTF Extension', rtf_desc:'I also have my own translations in RTF Extension.',
+    contact_overline:'CONTACT', contact_title:'Need Russian <span>localization?</span>', contact_desc:'Telegram or Discord – both are fine.', copy_label:'Copy',
+    footer_text:'Minecraft localization portfolio · 2026', footer_top:'Back to top ↑',
+    card_label:'Translation for KennnyMC', card_status:'Russian localization', card_more:'Details ↗',
+    dialog_contribution:'My role:', dialog_contribution_text:'Russian localization work for KennnyMC.',
+    dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original pack gallery ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
+  }
+};
 
-const normal = value => value.toLocaleLowerCase('ru').replace(/ё/g,'е').trim();
-function escapeHtml(value){return value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function cardMarkup(p,i){
-  const img = p.img ? `<img loading="lazy" alt="Иллюстрация оригинальной сборки ${escapeHtml(p.name)}" src="${p.img}" onerror="this.style.display='none'">` : '';
-  return `<article class="project-card" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><div class="card-cover"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${img}<span class="cover-label">Перевод для KennnyMC</span></div><div class="card-body"><span class="card-meta">${escapeHtml(p.genre)}</span><h3 class="card-title">${escapeHtml(p.name)}</h3><div class="card-footer"><span>Русская локализация</span><button class="card-more" type="button" data-project="${i}" aria-label="Подробнее о ${escapeHtml(p.name)}">Подробнее ↗</button></div></div></article>`;
+const nodes = {
+  grid: document.getElementById('project-grid'),
+  search: document.getElementById('project-search'),
+  count: document.getElementById('count-label'),
+  noResults: document.getElementById('empty-state'),
+  dialog: document.getElementById('project-dialog'),
+  dialogContent: document.getElementById('dialog-content'),
+  gallery: document.getElementById('gallery-track'),
+  loaderStack: document.getElementById('loader-stack'),
+  copyDiscord: document.getElementById('copy-discord'),
+  copyLabel: document.getElementById('copy-label')
+};
+
+let activeFilter = 'all';
+let currentLang = detectLanguage();
+
+function detectLanguage(){
+  let saved = null;
+  try { saved = localStorage.getItem('site_lang'); } catch (_) {}
+  if(saved === 'ru' || saved === 'en') return saved;
+  return navigator.language && navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en';
 }
+function t(key){ return UI[currentLang][key] ?? key; }
+function normal(value){ return String(value).toLocaleLowerCase(currentLang).replace(/ё/g,'е').trim(); }
+function escapeHtml(value){ return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function pluralRu(n, one, few, many){ return n%10===1 && n%100!==11 ? one : (n%10>=2 && n%10<=4 && (n%100<12 || n%100>14)) ? few : many; }
+function projectCountLabel(n){ return currentLang === 'ru' ? `${n} ${pluralRu(n,'проект','проекта','проектов')}` : `${n} project${n===1?'':'s'}`; }
+
+function applyStaticTranslations(){
+  document.documentElement.lang = UI[currentLang].htmlLang;
+  document.title = t('metaTitle');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (key) el.textContent = t(key);
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (key) el.innerHTML = t(key);
+  });
+  nodes.search.placeholder = t('search_placeholder');
+  nodes.search.setAttribute('aria-label', t('search_placeholder'));
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const on = btn.dataset.lang === currentLang;
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-pressed', String(on));
+  });
+}
+
+function cardMarkup(p, i){
+  const img = p.img ? `<img loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" onerror="this.style.display='none'">` : ''; 
+  return `<article class="project-card" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}">
+      <div class="card-cover"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${img}<span class="cover-label">${escapeHtml(t('card_label'))}</span></div>
+      <div class="card-body">
+        <span class="card-meta">${escapeHtml(p.genre[currentLang])}</span>
+        <h3 class="card-title">${escapeHtml(p.name)}</h3>
+        <div class="card-footer"><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
+      </div>
+    </article>`;
+}
+
 function render(){
- const q=normal(search.value);
- const matches=projects.map((p,i)=>({p,i})).filter(({p})=>(activeFilter==='all'||p.theme===activeFilter)&&(!q||normal(p.name+' '+p.genre).includes(q)));
- grid.innerHTML=matches.map(({p,i})=>cardMarkup(p,i)).join('');
- noResults.hidden=matches.length>0;
- count.textContent=`${matches.length} ${plural(matches.length,'проект','проекта','проектов')}`;
+  const q = normal(nodes.search.value);
+  const matches = projects.map((p, i) => ({p, i})).filter(({p}) => {
+    const haystack = normal([p.name, p.genre[currentLang], p.desc[currentLang]].join(' '));
+    return (activeFilter === 'all' || p.theme === activeFilter) && (!q || haystack.includes(q));
+  });
+  nodes.grid.innerHTML = matches.map(({p, i}) => cardMarkup(p, i)).join('');
+  nodes.noResults.hidden = matches.length > 0;
+  nodes.count.textContent = projectCountLabel(matches.length);
 }
-function plural(n,one,few,many){return n%10===1&&n%100!==11?one:(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?few:many}
+
 function showProject(index){
- const p=projects[index];if(!p)return;
- const img=p.img?`<div class="dialog-image"><img src="${p.img}" alt="Оригинальная сборка ${escapeHtml(p.name)}" onerror="this.style.display='none'"></div>`:'';
- const link=p.source?`<a class="dialog-link" href="${p.source}" target="_blank" rel="noopener noreferrer">Иллюстрации оригинальной сборки ↗</a>`:'';
- const translationLink=p.translationShots?`<a class="dialog-link" href="${p.translationShots}" target="_blank" rel="noopener noreferrer">Скриншоты перевода у KennnyMC ↗</a>`:'';
- dialogContent.innerHTML=`${img}<div class="dialog-main"><div class="dialog-topic">${escapeHtml(p.genre)}</div><h2 id="dialog-title">${escapeHtml(p.name)}</h2><p>${escapeHtml(p.desc)}</p><div class="dialog-meta"><strong>Мой вклад:</strong> работа над русской локализацией для KennnyMC. Это персональное портфолио, не официальная страница сборки.</div><div class="dialog-links">${translationLink}${link}</div><p class="dialog-source">Иллюстрация, если показана, принадлежит создателям оригинальной сборки. Ссылка «Скриншоты перевода», если есть, ведёт к галерее, указанной в публикации KennnyMC. Некоторые альбомы Telegram требуют доступа. Собственные сравнения EN / RU будут добавляться отдельно.</p></div>`;
- if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+  const p = projects[index]; if(!p) return;
+  const img = p.img ? `<div class="dialog-image"><img src="${p.img}" alt="${escapeHtml(p.name)}" onerror="this.style.display='none'"></div>` : '';
+  const sourceLink = p.source ? `<a class="dialog-link" href="${p.source}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_original'))}</a>` : '';
+  const translationLink = p.translationShots ? `<a class="dialog-link" href="${p.translationShots}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_translation'))}</a>` : '';
+  nodes.dialogContent.innerHTML = `${img}
+    <div class="dialog-main">
+      <div class="dialog-topic">${escapeHtml(p.genre[currentLang])}</div>
+      <h2 id="dialog-title">${escapeHtml(p.name)}</h2>
+      <p>${escapeHtml(p.desc[currentLang])}</p>
+      <div class="dialog-meta"><strong>${escapeHtml(t('dialog_contribution'))}</strong> ${escapeHtml(t('dialog_contribution_text'))}</div>
+      <div class="dialog-links">${translationLink}${sourceLink}</div>
+      <p class="dialog-source">${escapeHtml(t('dialog_note'))}</p>
+    </div>`;
+  if(typeof nodes.dialog.showModal === 'function') nodes.dialog.showModal();
+  else nodes.dialog.setAttribute('open','');
 }
-search.addEventListener('input',render);
-document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{activeFilter=button.dataset.filter;document.querySelectorAll('.filter').forEach(b=>{const current=b===button;b.classList.toggle('active',current);b.setAttribute('aria-pressed',String(current));});render()}));
-grid.addEventListener('click',event=>{const button=event.target.closest('[data-project]');if(button)showProject(Number(button.dataset.project));});
-document.getElementById('reset-filters').addEventListener('click',()=>{search.value='';document.querySelector('[data-filter="all"]').click();search.focus()});
-document.getElementById('dialog-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-const gallery=document.getElementById('gallery-track');
-document.getElementById('gallery-next').addEventListener('click',()=>gallery.scrollBy({left:gallery.clientWidth*.68,behavior:'smooth'}));
-document.getElementById('gallery-prev').addEventListener('click',()=>gallery.scrollBy({left:-gallery.clientWidth*.68,behavior:'smooth'}));
-document.getElementById('copy-discord').addEventListener('click',async()=>{
- const label=document.getElementById('copy-label');
- try{await navigator.clipboard.writeText('sheiny__');label.textContent='Скопировано ✓'}
- catch {label.textContent='Ник: sheiny__';}
-});
+
+function setLanguage(lang){
+  currentLang = lang === 'ru' ? 'ru' : 'en';
+  try { localStorage.setItem('site_lang', currentLang); } catch (_) {}
+  applyStaticTranslations();
+  render();
+}
+
+function initLanguageSwitcher(){
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+}
+
+function initFilters(){
+  document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    document.querySelectorAll('.filter').forEach(b => {
+      const current = b === button;
+      b.classList.toggle('active', current);
+      b.setAttribute('aria-pressed', String(current));
+    });
+    render();
+  }));
+}
+
+function initDialog(){
+  nodes.grid.addEventListener('click', event => {
+    const button = event.target.closest('[data-project]');
+    if(button) showProject(Number(button.dataset.project));
+  });
+  document.getElementById('dialog-close').addEventListener('click', () => nodes.dialog.close());
+  nodes.dialog.addEventListener('click', event => { if(event.target === nodes.dialog) nodes.dialog.close(); });
+}
+
+function initGallery(){
+  document.getElementById('gallery-next').addEventListener('click', () => nodes.gallery.scrollBy({left: nodes.gallery.clientWidth * .68, behavior:'smooth'}));
+  document.getElementById('gallery-prev').addEventListener('click', () => nodes.gallery.scrollBy({left: -nodes.gallery.clientWidth * .68, behavior:'smooth'}));
+}
+
+function initCopy(){
+  nodes.copyDiscord.addEventListener('click', async() => {
+    try { await navigator.clipboard.writeText('sheiny__'); nodes.copyLabel.textContent = currentLang === 'ru' ? 'Скопировано ✓' : 'Copied ✓'; }
+    catch { nodes.copyLabel.textContent = currentLang === 'ru' ? 'Ник: sheiny__' : 'Nick: sheiny__'; }
+    setTimeout(() => { nodes.copyLabel.textContent = t('copy_label'); }, 2200);
+  });
+}
+
+function initSearchAndReset(){
+  nodes.search.addEventListener('input', render);
+  document.getElementById('reset-filters').addEventListener('click', () => {
+    nodes.search.value = '';
+    document.querySelector('[data-filter="all"]').click();
+    nodes.search.focus();
+  });
+}
+
+function initLoaderRotation(){
+  if(!nodes.loaderStack) return;
+  const items = [...nodes.loaderStack.querySelectorAll('.loader-badge')];
+  const dirs = ['vertical','horizontal','diagonal'];
+  let index = 0; let dirIndex = 0;
+  setInterval(() => {
+    items[index].classList.remove('active');
+    index = (index + 1) % items.length;
+    dirIndex = (dirIndex + 1) % dirs.length;
+    nodes.loaderStack.dataset.direction = dirs[dirIndex];
+    items[index].classList.add('active');
+  }, 3000);
+}
+
+applyStaticTranslations();
+initLanguageSwitcher();
+initFilters();
+initDialog();
+initGallery();
+initCopy();
+initSearchAndReset();
+initLoaderRotation();
 render();

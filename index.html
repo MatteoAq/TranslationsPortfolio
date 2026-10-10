@@ -4,72 +4,202 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0c0813">
-  <meta name="description" content="Sheiny – русская локализация Minecraft: модпаки, моды, квесты и игровые интерфейсы. Портфолио переводов для KennnyMC и вклад в RTF Extension.">
+  <meta name="description" content="Sheiny – Minecraft localization portfolio.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sheiny – локализация Minecraft">
-  <meta property="og:description" content="Minecraft на русском. 15 сборок, перевод интерфейсов, квестов и модов.">
-  <meta property="og:locale" content="ru_RU">
-  <title>Sheiny – переводы Minecraft</title>
+  <meta property="og:title" content="Sheiny – Minecraft localization">
+  <meta property="og:description" content="Minecraft modpacks, quests, UI and mod localization.">
+  <title>Sheiny – Minecraft localization</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#work">К списку переводов</a>
+  <a class="skip-link" href="#work">Skip to projects</a>
   <div class="site-shell" id="top">
     <header class="site-header container">
-      <a class="wordmark" href="#top" aria-label="Sheiny – на главную"><span class="brand-symbol">s<span>.</span></span><span>sheiny<span class="brand-dot">.</span></span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="#work">Проекты</a><a href="#approach">Что я делаю</a><a href="#about">Обо мне</a></nav>
-      <a class="header-contact" href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer">Написать <span aria-hidden="true">↗</span></a>
+      <a class="wordmark" href="#top" aria-label="Sheiny home"><span class="brand-symbol">s<span>.</span></span><span>sheiny<span class="brand-dot">.</span></span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#work" data-i18n="nav_projects">Projects</a>
+        <a href="#approach" data-i18n="nav_approach">What I do</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language switcher">
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="header-contact" href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer"><span data-i18n="header_contact">Contact</span> <span aria-hidden="true">↗</span></a>
+      </div>
     </header>
 
     <main>
       <section class="hero container" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span>НЕЗАВИСИМЫЙ ЛОКАЛИЗАТОР MINECRAFT</span></div>
-          <h1 id="hero-title">Чтобы Minecraft<br>говорил <em>по-русски.</em></h1>
-          <p class="hero-desc">Привет, я Sheiny. Перевожу Minecraft-сборки и модификации на русский язык – от названий предметов до квестов, книг и игровых интерфейсов.</p>
-          <div class="hero-actions"><a class="primary-action" href="#work">Посмотреть работы <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#approach">Как устроен перевод <span aria-hidden="true">↓</span></a></div>
-          <div class="hero-stats" aria-label="О портфолио"><div><strong>15</strong><span>сборок в портфолио</span></div><div class="stat-separator"></div><div><strong>RTF<span class="small-plus">+</span></strong><span>вклад в сообщество</span></div><div class="stat-separator"></div><div><strong>RU</strong><span>локализация модов</span></div></div>
+          <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-i18n="hero_eyebrow">INDEPENDENT MINECRAFT LOCALIZER</span></div>
+          <h1 id="hero-title" data-i18n-html="hero_title">Making Minecraft speak <em>Russian.</em></h1>
+          <p class="hero-desc" data-i18n="hero_desc">I localize modpacks, mods, quests and interfaces for Russian-speaking players.</p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#work"><span data-i18n="hero_action_primary">View projects</span> <span aria-hidden="true">↗</span></a>
+            <a class="quiet-link" href="#approach"><span data-i18n="hero_action_secondary">What I localize</span> <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-stats" aria-label="Portfolio stats">
+            <div><strong>15</strong><span data-i18n="stat_projects">projects</span></div>
+
+
+          </div>
         </div>
-        <div class="hero-art" aria-label="Иллюстрации из галерей Minecraft-сборок">
+        <div class="hero-art" aria-label="Minecraft pack illustrations">
           <div class="hero-glow"></div>
-          <div class="hero-main-shot image-panel"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" alt="Мир Края из официальной галереи Create: Stranded at Sea" fetchpriority="high"></div>
-          <div class="hero-small-shot image-panel"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" alt="Тёмный лес из официальной галереи Whispers in the Void"></div>
-          <div class="floating-panel"><div class="floating-icon">文<span>→</span>Я</div><div><strong>Локализация – не замена слов.</strong><span>Смысл. Контекст. Атмосфера.</span></div><span class="floating-spark">✦</span></div>
-          <div class="hero-caption">ОФИЦИАЛЬНЫЕ ИЛЛЮСТРАЦИИ СБОРОК / CURSEFORGE</div>
+          <div class="hero-main-shot image-panel"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" alt="Create: Stranded at Sea official illustration" fetchpriority="high"></div>
+          <div class="hero-small-shot image-panel"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" alt="Whispers in the Void official illustration"></div>
+          <div class="hero-caption" data-i18n="hero_caption">OFFICIAL PACK ART / CURSEFORGE</div>
         </div>
       </section>
 
       <section class="projects section container" id="work" aria-labelledby="work-title">
-        <div class="section-head"><div><div class="section-overline"><span class="section-index">01</span> ПОРТФОЛИО</div><h2 id="work-title">Сборки, над которыми <span>я работал.</span></h2><p>Мои переводы для проекта KennnyMC. Все названия из личного списка работ.</p></div><span class="section-count" id="count-label">15 проектов</span></div>
-        <div class="catalog-tools"><label class="search-box" for="project-search"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 5 5"/></svg><input id="project-search" type="search" placeholder="Найти сборку..." autocomplete="off" aria-label="Поиск по названиям сборок"></label><div class="filter-pills" role="group" aria-label="Фильтр по тематике"><button class="filter active" type="button" data-filter="all" aria-pressed="true">Все</button><button class="filter" type="button" data-filter="adventure" aria-pressed="false">Приключения</button><button class="filter" type="button" data-filter="tech" aria-pressed="false">Технологии</button><button class="filter" type="button" data-filter="survival" aria-pressed="false">Выживание</button><button class="filter" type="button" data-filter="cozy" aria-pressed="false">Уютные</button></div></div>
+        <div class="section-head">
+          <div>
+            <div class="section-overline"><span class="section-index">01</span> <span data-i18n="portfolio_overline">PORTFOLIO</span></div>
+            <h2 id="work-title" data-i18n-html="work_title">Projects I <span>worked on.</span></h2>
+
+          </div>
+          <span class="section-count" id="count-label">15 projects</span>
+        </div>
+        <div class="catalog-tools">
+          <label class="search-box" for="project-search">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 5 5"/></svg>
+            <input id="project-search" type="search" placeholder="Find a project..." autocomplete="off" aria-label="Project search">
+          </label>
+          <div class="filter-pills" role="group" aria-label="Category filters">
+            <button class="filter active" type="button" data-filter="all" aria-pressed="true" data-i18n="filter_all">All</button>
+            <button class="filter" type="button" data-filter="adventure" aria-pressed="false" data-i18n="filter_adventure">Adventure</button>
+            <button class="filter" type="button" data-filter="tech" aria-pressed="false" data-i18n="filter_tech">Tech</button>
+            <button class="filter" type="button" data-filter="survival" aria-pressed="false" data-i18n="filter_survival">Survival</button>
+            <button class="filter" type="button" data-filter="cozy" aria-pressed="false" data-i18n="filter_cozy">Cozy</button>
+          </div>
+        </div>
         <div class="project-grid" id="project-grid" aria-live="polite"></div>
-        <div class="empty-state" id="empty-state" hidden><strong>Ничего не найдено.</strong><p>Попробуйте другое название или сбросьте фильтр.</p><button type="button" id="reset-filters">Показать все проекты</button></div>
-        <div class="project-footnote"><span class="small-outline-dot"></span> Иллюстрации взяты из публичных галерей оригинальных сборок. Это не скриншоты русификации. Авторство самих модпаков принадлежит их создателям.</div>
+        <div class="empty-state" id="empty-state" hidden>
+          <strong data-i18n="empty_title">Nothing found.</strong>
+          <p data-i18n="empty_desc">Try another name or reset the filter.</p>
+          <button type="button" id="reset-filters" data-i18n="empty_reset">Show all projects</button>
+        </div>
+        <div class="project-footnote"><span class="small-outline-dot"></span> <span data-i18n="project_footnote">Images are from public galleries of the original modpacks.</span></div>
       </section>
 
-      <section class="section gallery-section" aria-labelledby="gallery-title"><div class="container"><div class="section-head compact"><div><div class="section-overline"><span class="section-index">02</span> В ИГРЕ</div><h2 id="gallery-title">Разные миры. <span>Одна цель.</span></h2><p>Атмосфера сборок, для которых я готовил русский текст.</p></div><div class="gallery-arrows"><button type="button" class="gallery-btn" id="gallery-prev" aria-label="Предыдущие изображения">←</button><button type="button" class="gallery-btn" id="gallery-next" aria-label="Следующие изображения">→</button></div></div>
-      <div class="gallery-track" id="gallery-track" tabindex="0" aria-label="Галерея иллюстраций сборок">
-        <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" loading="lazy" alt="Зловещий лес – Whispers in the Void"><figcaption><span>WHISPERS IN THE VOID</span><a href="https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery" target="_blank" rel="noopener noreferrer">Источник ↗</a></figcaption></figure>
-        <figure class="gallery-card"><img src="https://i.imgur.com/QYhDakk.jpeg" loading="lazy" alt="Заснеженная база – The Winter Rescue"><figcaption><span>THE WINTER RESCUE</span><a href="https://www.curseforge.com/minecraft/modpacks/the-winter-rescue/gallery" target="_blank" rel="noopener noreferrer">Источник ↗</a></figcaption></figure>
-        <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" loading="lazy" alt="Изменённый Край – Create: Stranded at Sea"><figcaption><span>CREATE: STRANDED AT SEA</span><a href="https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea" target="_blank" rel="noopener noreferrer">Источник ↗</a></figcaption></figure>
-        <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png" loading="lazy" alt="Подземное хранилище – Society: Sunlit Valley"><figcaption><span>SOCIETY: SUNLIT VALLEY</span><a href="https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery" target="_blank" rel="noopener noreferrer">Источник ↗</a></figcaption></figure>
-      </div><p class="gallery-note">В карточках отдельных проектов есть ссылки на галереи именно переводов, опубликованные KennnyMC. Собственные сравнительные снимки EN / RU добавлю после проверки кадров.</p></div></section>
+      <section class="section gallery-section" aria-labelledby="gallery-title">
+        <div class="container">
+          <div class="section-head compact">
+            <div>
+              <div class="section-overline"><span class="section-index">02</span> <span data-i18n="gallery_overline">IN GAME</span></div>
+              <h2 id="gallery-title" data-i18n-html="gallery_title">Different packs. <span>One language goal.</span></h2>
+  
+            </div>
+            <div class="gallery-arrows">
+              <button type="button" class="gallery-btn" id="gallery-prev" aria-label="Previous images">←</button>
+              <button type="button" class="gallery-btn" id="gallery-next" aria-label="Next images">→</button>
+            </div>
+          </div>
+          <div class="gallery-track" id="gallery-track" tabindex="0" aria-label="Pack gallery">
+            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg" loading="lazy" alt="Whispers in the Void"><figcaption><span>WHISPERS IN THE VOID</span><a href="https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
+            <figure class="gallery-card"><img src="https://i.imgur.com/QYhDakk.jpeg" loading="lazy" alt="The Winter Rescue"><figcaption><span>THE WINTER RESCUE</span><a href="https://www.curseforge.com/minecraft/modpacks/the-winter-rescue/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
+            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png" loading="lazy" alt="Create: Stranded at Sea"><figcaption><span>CREATE: STRANDED AT SEA</span><a href="https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
+            <figure class="gallery-card"><img src="https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png" loading="lazy" alt="Society: Sunlit Valley"><figcaption><span>SOCIETY: SUNLIT VALLEY</span><a href="https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery" target="_blank" rel="noopener noreferrer" data-i18n="source_link">Source ↗</a></figcaption></figure>
+          </div>
+        </div>
+      </section>
 
-      <section class="section container" id="approach" aria-labelledby="approach-title"><div class="section-head"><div><div class="section-overline"><span class="section-index">03</span> ПОДХОД</div><h2 id="approach-title">Локализую <span>не только строки.</span></h2><p>В Minecraft перевод распределён по множеству файлов и интерфейсов.</p></div></div><div class="services-grid">
-        <article class="service"><span class="service-num">/ 01</span><div class="service-icon">Aa</div><h3>Моды и предметы</h3><p>Названия, описания, подсказки, единая терминология и нормальный русский язык.</p></article>
-        <article class="service"><span class="service-num">/ 02</span><div class="service-icon icon-quests">⌘</div><h3>Квесты и книги</h3><p>Задания, руководства, диалоги и связный текст с сохранением игрового смысла.</p></article>
-        <article class="service"><span class="service-num">/ 03</span><div class="service-icon icon-ui">▣</div><h3>Интерфейсы</h3><p>Меню, HUD, графика с текстом и элементы интерфейса, которым мало одного lang-файла.</p></article>
-        <article class="service"><span class="service-num">/ 04</span><div class="service-icon icon-code">{ }</div><h3>Нестандартные случаи</h3><p>KubeJS, динамические названия и текст, зашитый в код: поиск реального источника строки.</p></article>
-      </div></section>
+      <section class="section container" id="approach" aria-labelledby="approach-title">
+        <div class="section-head compact-text">
+          <div>
+            <div class="section-overline"><span class="section-index">03</span> <span data-i18n="approach_overline">WHAT I DO</span></div>
+            <h2 id="approach-title" data-i18n-html="approach_title">What exactly <span>I localize.</span></h2>
 
-      <section class="section container about-section" id="about" aria-labelledby="about-title"><div class="about-card"><div class="about-symbol" aria-hidden="true">s<span>.</span></div><div class="about-content"><div class="section-overline"><span class="section-index">04</span> ОБО МНЕ</div><h2 id="about-title">Sheiny <span>– перевожу, чтобы было понятно.</span></h2><p>Делаю русские локализации Minecraft-модпаков для проекта <a href="https://t.me/kennnyrus" target="_blank" rel="noopener noreferrer">KennnyMC</a>. Работаю с текстом, техническими файлами и игровыми интерфейсами. Моя долгосрочная цель – помочь перевести на русский как можно больше контента, связанного с Minecraft.</p><div class="rtf-proof"><div><span class="proof-mark">✦</span><strong>Вклад в RTF Extension</strong></div><p>Мои переводы <b>Genshin Instruments</b> и <b>Serene Shrubbery</b> указаны под ником Sheiny на странице проекта и в его обновлениях.</p><a href="https://www.curseforge.com/minecraft/texture-packs/rtf-extension" target="_blank" rel="noopener noreferrer">Посмотреть упоминание на CurseForge ↗</a></div></div></div></section>
+          </div>
+        </div>
+        <div class="services-grid">
+          <article class="service">
+            <span class="service-num">/ 01</span>
+            <div class="service-icon service-icon-loaders" aria-label="Fabric, Forge, NeoForge">
+              <div class="loader-stack" id="loader-stack" data-direction="vertical">
+                <span class="loader-badge active loader-fabric"><img src="https://raw.githubusercontent.com/FabricMC/community/main/media/unascribed/png/fabric.png" alt="" loading="lazy"><span>Fabric</span></span>
+                <span class="loader-badge loader-forge"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/26.3/forge_installer_logo.png" alt="" loading="lazy"><span>Forge</span></span>
+                <span class="loader-badge loader-neoforge"><img src="https://raw.githubusercontent.com/neoforged/.github/main/art/neoforge_logo.png" alt="" loading="lazy"><span>NeoForge</span></span>
+              </div>
+            </div>
+            <h3 data-i18n="service_mods_title">Mods and items</h3>
+            <p data-i18n="service_mods_desc">Names, tooltips and consistent terminology.</p>
+          </article>
+          <article class="service">
+            <span class="service-num">/ 02</span>
+            <div class="service-icon icon-illustrated" aria-label="FTB Quests">
+              <img class="mod-icon pixel-art" src="https://raw.githubusercontent.com/FTBTeam/FTB-Quests/main/common/src/main/resources/assets/ftbquests/textures/item/book.png" alt="FTB Quests" loading="lazy">
+            </div>
+            <h3 data-i18n="service_quests_title">Quests and books</h3>
+            <p data-i18n="service_quests_desc">Questbooks, guides and long-form in-game text.</p>
+          </article>
+          <article class="service">
+            <span class="service-num">/ 03</span>
+            <div class="service-icon icon-illustrated" aria-label="FancyMenu">
+              <img class="mod-icon" src="https://raw.githubusercontent.com/Keksuccino/FancyMenu/master/assets/fancymenu_glyph_128x128.png" alt="FancyMenu" loading="lazy">
+            </div>
+            <h3 data-i18n="service_ui_title">Interfaces</h3>
+            <p data-i18n="service_ui_desc">FancyMenu screens, HUDs and text-heavy UI pieces.</p>
+          </article>
+          <article class="service">
+            <span class="service-num">/ 04</span>
+            <div class="service-icon icon-illustrated" aria-label="KubeJS">
+              <img class="mod-icon" src="https://raw.githubusercontent.com/kube-mods/kubejs/2601/src/main/resources/kubejs_logo.png" alt="KubeJS" loading="lazy">
+            </div>
+            <h3 data-i18n="service_code_title">KubeJS and custom cases</h3>
+            <p data-i18n="service_code_desc">Scripts, dynamic names and text hidden outside lang files.</p>
+          </article>
+        </div>
+      </section>
 
-      <section class="contact-section container" id="contact" aria-labelledby="contact-title"><div class="contact-glow"></div><div><div class="section-overline"><span class="section-index">05</span> СВЯЗЬ</div><h2 id="contact-title">Есть мод, которому<br>не хватает <span>русского?</span></h2><p>Напиши мне в Telegram или Discord. Обсудим локализацию.</p><div class="contact-actions"><a class="primary-action" href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer">Telegram · @shei1ny <span aria-hidden="true">↗</span></a><button class="discord-copy" type="button" id="copy-discord" aria-label="Скопировать Discord sheiny__">Discord · <b>sheiny__</b> <span id="copy-label">Копировать</span></button></div></div><div class="contact-decoration" aria-hidden="true">RU<span>✳</span>EN</div></section>
+      <section class="section container about-section" id="about" aria-labelledby="about-title">
+        <div class="about-card">
+          <div class="about-symbol" aria-hidden="true">s<span>.</span></div>
+          <div class="about-content">
+            <div class="section-overline"><span class="section-index">04</span> <span data-i18n="about_overline">ABOUT</span></div>
+            <h2 id="about-title" data-i18n-html="about_title">Sheiny <span>– Minecraft localization.</span></h2>
+            <p data-i18n="about_desc">I work on Russian localization for Minecraft projects, mostly modpacks and related UI.</p>
+            <div class="rtf-proof">
+              <div><span class="proof-mark">✦</span> <strong data-i18n="rtf_title">RTF Extension</strong></div>
+              <p data-i18n="rtf_desc">I also have my own translations in RTF Extension.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section container" id="contact" aria-labelledby="contact-title">
+        <div>
+          <div class="section-overline"><span class="section-index">05</span> <span data-i18n="contact_overline">CONTACT</span></div>
+          <h2 id="contact-title" data-i18n-html="contact_title">Need Russian <span>localization?</span></h2>
+          <p data-i18n="contact_desc">Telegram or Discord – both are fine.</p>
+          <div class="contact-actions">
+            <a class="primary-action" href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer">Telegram · @shei1ny <span aria-hidden="true">↗</span></a>
+            <button class="discord-copy" id="copy-discord" type="button">Discord · sheiny__ <span id="copy-label" data-i18n="copy_label">Copy</span></button>
+          </div>
+        </div>
+        <div class="contact-decoration" aria-hidden="true">ru <span>/</span> en</div>
+      </section>
     </main>
-    <footer class="site-footer container"><a class="footer-brand" href="#top">sheiny<span>.</span></a><span>Русская локализация Minecraft · 2026</span><div><a href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a href="https://github.com/MatteoAq/TranslationsPortfolio" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#top">Наверх ↑</a></div></footer>
+
+    <footer class="site-footer container">
+      <div class="footer-brand">sheiny<span>.</span></div>
+      <span data-i18n="footer_text">Minecraft localization portfolio · 2026</span>
+      <div>
+        <a href="https://t.me/shei1ny" target="_blank" rel="noopener noreferrer">Telegram ↗</a>
+        <a href="https://github.com/MatteoAq/TranslationsPortfolio" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="#top" data-i18n="footer_top">Back to top ↑</a>
+      </div>
+    </footer>
   </div>
-  <dialog id="project-dialog" class="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" id="dialog-close" aria-label="Закрыть карточку">×</button><div id="dialog-content"></div></dialog>
+
+  <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Close">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
 </body>
 </html>
