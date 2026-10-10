@@ -319,7 +319,6 @@ initFilters();
 initDialog();
 initCopy();
 initSearchAndReset();
-initLoaderRotation();
 render();
 
 function initSectionQuickNav(){
