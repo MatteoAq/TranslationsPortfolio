@@ -10,8 +10,8 @@
   <meta property="og:description" content="Minecraft modpacks, quests, UI and mod localization.">
   <title>Sheiny – Minecraft localization</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=5">
+  <script src="./app.js?v=5" defer></script>
 </head>
 <body>
 <nav class="quick-nav" aria-label="Quick navigation"><a href="#top" data-section-link="top" data-i18n="quick_home">Home</a><a href="#work" data-section-link="work" data-i18n="quick_projects">Projects</a><a href="#approach" data-section-link="approach" data-i18n="quick_focus">Focus</a><a href="#about" data-section-link="about" data-i18n="quick_about">About</a><a href="#contact" data-section-link="contact" data-i18n="quick_contact">Contact</a></nav>
@@ -99,11 +99,11 @@
         <div class="services-grid">
           <article class="service">
             <div class="service-icon service-icon-loaders" aria-label="Fabric, Forge, NeoForge">
-              <div class="loader-stack" id="loader-stack" data-direction="vertical">
-              <span class="loader-badge active loader-fabric" title="Fabric"><img src="https://raw.githubusercontent.com/FabricMC/community/main/media/unascribed/png/fabric.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
-              <span class="loader-badge loader-forge" title="Forge"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/26.3/forge_installer_logo.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
-              <span class="loader-badge loader-neoforge" title="NeoForge"><img src="https://raw.githubusercontent.com/neoforged/.github/main/art/neoforge_logo.png" alt="" loading="lazy" onerror="this.style.display='none'"></span>
-            </div>
+              <div class="loader-stack" id="loader-stack" aria-hidden="true">
+<span class="loader-badge active" title="Fabric"><img class="loader-brand-icon" src="https://raw.githubusercontent.com/FabricMC/community/main/media/unascribed/png/fabric.png" alt="" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><svg class="brand-fallback" style="display:none" viewBox="0 0 64 64" aria-hidden="true"><path fill="#f6d588" d="M39 6 21 17l-4 13 8 19 14 9 8-17-9-8 10-5 3-14z"/><path fill="#5b3718" d="M31 15 24 25l4 8 7 2 5-7-3-9z"/></svg></span>
+<span class="loader-badge" title="Forge"><img class="loader-brand-icon" src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/26.3/icon.ico" alt="" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><svg class="brand-fallback" style="display:none" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ffb66f" d="M18 20h28l5 8-5 8H18l-5-8z"/><path fill="#ffe0bf" d="M25 15h14v8H25z"/><path fill="#9e5527" d="M21 36h22v13H21z"/></svg></span>
+<span class="loader-badge" title="NeoForge"><img class="loader-brand-icon" src="https://raw.githubusercontent.com/neoforged/.github/main/art/neoforged_icon_16x16.png" alt="" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><svg class="brand-fallback" style="display:none" viewBox="0 0 64 64" aria-hidden="true"><path fill="#9ec9ff" d="M32 8 52 20v24L32 56 12 44V20z"/><path fill="#fff" d="M32 18 43 24v16L32 46 21 40V24z"/></svg></span>
+</div>
             </div>
             <h3 data-i18n="service_mods_title">Mods and items</h3>
             <p data-i18n="service_mods_desc">Names, tooltips and consistent terminology.</p>
@@ -142,6 +142,10 @@
             <div class="rtf-proof">
               <div><span class="proof-mark">✦</span> <strong data-i18n="rtf_title">RTF Extension</strong></div>
               <p data-i18n="rtf_desc">I also have my own translations in RTF Extension.</p>
+<div class="rtf-platform-links">
+<a class="rtf-platform-link" href="https://modrinth.com/resourcepack/rtf-extension" target="_blank" rel="noopener noreferrer"><img src="https://modrinth.com/favicon.ico" alt="" width="20" height="20" onerror="this.style.display='none'">Modrinth <span aria-hidden="true">↗</span></a>
+<a class="rtf-platform-link" href="https://www.curseforge.com/minecraft/texture-packs/rtf-extension" target="_blank" rel="noopener noreferrer"><img src="https://www.curseforge.com/favicon.ico" alt="" width="20" height="20" onerror="this.style.display='none'">CurseForge <span aria-hidden="true">↗</span></a>
+</div>
             </div>
           </div>
         </div>
