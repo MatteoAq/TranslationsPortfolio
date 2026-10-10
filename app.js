@@ -327,10 +327,10 @@ function initSectionQuickNav(){
  if(!links.length||!('IntersectionObserver' in window))return;
  const obs=new IntersectionObserver(entries=>{
   for(const entry of entries){if(!entry.isIntersecting)continue;
-   const id=entry.target.id;
+   const id=entry.target.classList.contains('hero')?'top':entry.target.id;
    for(const link of links){const active=link.dataset.sectionLink===id;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');}
   }
  },{rootMargin:'-30% 0px -50% 0px',threshold:0.01});
- for(const id of ['top','work','approach','about','contact']){const node=document.getElementById(id);if(node)obs.observe(node)}
+ for(const id of ['top','work','approach','about','contact']){const node=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(node)obs.observe(node)}
 }
 initSectionQuickNav();
