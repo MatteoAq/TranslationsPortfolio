@@ -20,3 +20,5 @@ jobs:
         run: python scripts/inspect_kenny_links.py
 
 # Inspect homepage navigation for direct per-pack links.
+
+# Read actual sitemap paths and translation page titles.
