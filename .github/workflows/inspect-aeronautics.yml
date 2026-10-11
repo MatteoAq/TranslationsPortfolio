@@ -1,29 +1,20 @@
-name: Inspect Aeronautics render style
+name: Inspect Kenny translation links
 on:
   push:
     paths:
       - .github/workflows/inspect-aeronautics.yml
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: '22'
-      - run: npm install --no-save --no-package-lock playwright-core@1.57.0
-      - name: Capture official project site reference
-        run: |
-          mkdir -p qa-shots
-          node scripts/inspect_aeronautics.cjs
-      - name: Commit temporary QA image
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add qa-shots/aeronautics-reference.jpg
-          git commit -m "Temporary reference for portrait QA"
-          git push origin HEAD:main
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Inspect official Kenny site and sitemap
+        run: python scripts/inspect_kenny_links.py
