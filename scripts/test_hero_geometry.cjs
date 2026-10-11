@@ -51,7 +51,19 @@ async function capture(page){
    }
    assert(ru.scrollWidth<=size.width+2,'RU horizontal overflow '+size.name+': '+ru.scrollWidth);
    assert(en.scrollWidth<=size.width+2,'EN horizontal overflow '+size.name+': '+en.scrollWidth);
+   await page.locator('.about-avatar').scrollIntoViewIfNeeded();
+   await page.waitForFunction(()=>[...document.querySelectorAll('.about-avatar .avatar-pose')].every(img=>img.complete&&img.naturalWidth>0),{timeout:20000});
+   const artwork=await page.evaluate(()=>{
+      const el=document.querySelector('.about-avatar'),rect=el.getBoundingClientRect();
+      const img=[...el.querySelectorAll('img')].map(x=>({ok:x.complete&&x.naturalWidth>0,width:x.naturalWidth,height:x.naturalHeight,animation:getComputedStyle(x).animationDuration}));
+      return {w:rect.width,h:rect.height,img,scroll:document.documentElement.scrollWidth};
+   });
+   assert.equal(artwork.img.length,3);
+   assert(artwork.img.every(x=>x.ok&&x.width>0&&x.height>0),'invalid skin artwork on '+size.name);
+   assert(artwork.scroll<=size.width+2,'About art overflows on '+size.name);
+   await page.screenshot({path:'qa-shots/'+size.name+'-about-en.png',fullPage:false});
    assert.equal(errors.length,0,errors.join(' ; '));
+   console.log('ABOUT',size.name,JSON.stringify(artwork));
    console.log(size.name,JSON.stringify({ru:ru.cards.map(x=>({w:round(x.width),h:round(x.height)})),en:en.cards.map(x=>({w:round(x.width),h:round(x.height)})),art_ru:[round(ru.art.width),round(ru.art.height)],art_en:[round(en.art.width),round(en.art.height)],scroll_ru:ru.scrollWidth,scroll_en:en.scrollWidth}));
    await context.close();
   }
