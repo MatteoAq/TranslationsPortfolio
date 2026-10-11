@@ -36,6 +36,18 @@ async function capture(page){
    await page.waitForSelector('.project-card');
    const ru=await capture(page);
    await page.screenshot({path:'qa-shots/'+size.name+'-ru.png',fullPage:false});
+   // Regression: the Russian "Проекты" button must reveal the portfolio heading,
+   // not the empty upper padding of its section.
+   const ruNav=size.width>1180?'.quick-nav':'.mobile-dock';
+   await page.locator(ruNav+' a[href="#work"]').click();
+   await page.waitForTimeout(140);
+   const ruLanding=await page.evaluate(()=>{
+     const heading=document.querySelector('#work > .section-head').getBoundingClientRect();
+     return {top:heading.top,bottom:heading.bottom,active:[...document.querySelectorAll('[data-section-link="work"]')].every(x=>x.classList.contains('active'))};
+   });
+   assert(ruLanding.active&&ruLanding.top>=-5&&ruLanding.top<=60,'Russian projects anchor landed in blank space: '+JSON.stringify(ruLanding));
+   console.log('RU PROJECTS',size.name,JSON.stringify(ruLanding));
+   await page.locator(ruNav+' a[href="#top"]').click();
    await page.locator('.lang-btn[data-lang="en"]').click();
    await page.evaluate(()=>document.fonts.ready);
    const en=await capture(page);
