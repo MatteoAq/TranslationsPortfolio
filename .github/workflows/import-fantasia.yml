@@ -1,0 +1,28 @@
+name: Import verified Fantasia image
+on:
+  push:
+    paths:
+      - .github/workflows/import-fantasia.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check requests Pillow
+      - run: python scripts/import_verified_fantasia.py
+      - name: Validate JavaScript
+        run: node --check app.js
+      - name: Commit verified image and proof
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/verified-waccyys-fantasia.webp assets/cover-audit.json index.html app.js
+          git commit -m "Add official Fantasia gallery image and verify Opolis gallery source"
+          git push origin HEAD:main
