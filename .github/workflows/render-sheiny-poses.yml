@@ -33,3 +33,5 @@ jobs:
             git commit -m "Render original Sheiny skin in three independent poses"
             git push origin HEAD:main
           fi
+
+# Re-render with verified framing and pixel-textured blocks.
