@@ -72,7 +72,14 @@ async function capture(page){
    const navSelector=size.width>1180?'.quick-nav':'.mobile-dock';
    for(const id of ['work','approach','about','contact']){
       await page.locator(navSelector+' a[href="#'+id+'"]').click();
-      await page.waitForFunction(name => [...document.querySelectorAll('[data-section-link="'+name+'"]')].every(el=>el.classList.contains('active')),id);
+      await page.waitForTimeout(240);
+      const navState=await page.evaluate(id=>({
+        target:id,hash:location.hash,y:scrollY,
+        active:[...document.querySelectorAll('.quick-nav a.active,.mobile-dock a.active')].map(x=>x.dataset.sectionLink),
+        all:[...document.querySelectorAll('[data-section-link="'+id+'"]')].map(x=>x.classList.contains('active'))
+      }),id);
+      console.log('NAV',size.name,JSON.stringify(navState));
+      assert(navState.all.length===2&&navState.all.every(Boolean),'navigation active state mismatch '+JSON.stringify(navState));
       const check=await page.evaluate(id=>{
         const landmarks={work:document.querySelector('#work > .section-head'),approach:document.querySelector('#approach > .section-head'),about:document.querySelector('#about > .about-card'),contact:document.getElementById('contact')};
         const el=landmarks[id],r=el.getBoundingClientRect();
