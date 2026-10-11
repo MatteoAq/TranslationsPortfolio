@@ -30,3 +30,5 @@ jobs:
             git commit -m "Vendor verified modpack cover images locally"
             git push origin HEAD:main
           fi
+
+# One-time second pass: alternate Stranded at Sea cover source
