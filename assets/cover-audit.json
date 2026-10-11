@@ -65,9 +65,10 @@
     "source_note": "Create Stranded at Sea official CurseForge gallery"
   },
   "Opolis Inc": {
-    "status": "needs origin reconfirmation",
-    "local_file": "cover-opolis-inc.webp",
-    "source_note": "CurseForge media attachment; source gallery not reverified"
+    "status": "official gallery confirmed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/opolis-inc/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/954/66/opolis_inc_1.png",
+    "local_file": "cover-opolis-inc.webp"
   },
   "Create: Mekanized": {
     "status": "cover removed – previous source is an unrelated generic Minecraft image",
@@ -77,6 +78,9 @@
     "status": "no image until verified"
   },
   "waccyy's Fantasia": {
-    "status": "no image until verified"
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/waccyys-fantasia/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/1546/240/tof-png.png",
+    "local_file": "verified-waccyys-fantasia.webp"
   }
 }
