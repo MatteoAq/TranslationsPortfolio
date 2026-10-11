@@ -28,8 +28,12 @@ if not skin_props: raise SystemExit("Mojang textures missing")
 payload=json.loads(base64.b64decode(skin_props[0]["value"]))
 skin=payload.get("textures",{}).get("SKIN",{})
 skin_url=skin.get("url","")
-if not skin_url.startswith("https://textures.minecraft.net/texture/"):
+from urllib.parse import urlsplit
+parsed=urlsplit(skin_url)
+if parsed.hostname != "textures.minecraft.net" or parsed.scheme not in ("http", "https") or not parsed.path.startswith("/texture/"):
     raise SystemExit("Refusing unexpected skin URL: "+skin_url)
+# Mojang textures metadata sometimes uses an HTTP URL; force HTTPS for transport.
+skin_url="https://textures.minecraft.net"+parsed.path
 raw=s.get(skin_url,timeout=30)
 raw.raise_for_status()
 im=Image.open(io.BytesIO(raw.content))
