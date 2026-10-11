@@ -55,11 +55,17 @@ async function capture(page){
    await page.waitForFunction(()=>[...document.querySelectorAll('.about-avatar .avatar-pose')].every(img=>img.complete&&img.naturalWidth>0),{timeout:20000});
    const artwork=await page.evaluate(()=>{
       const el=document.querySelector('.about-avatar'),rect=el.getBoundingClientRect();
-      const img=[...el.querySelectorAll('img')].map(x=>({ok:x.complete&&x.naturalWidth>0,width:x.naturalWidth,height:x.naturalHeight,animation:getComputedStyle(x).animationDuration}));
+      const img=[...el.querySelectorAll('img')].map(x=>{
+         const c=document.createElement('canvas');c.width=1;c.height=1;
+         const g=c.getContext('2d');g.drawImage(x,0,0);
+         return {ok:x.complete&&x.naturalWidth>0,width:x.naturalWidth,height:x.naturalHeight,animation:getComputedStyle(x).animationDuration,
+                 alphaTopLeft:g.getImageData(0,0,1,1).data[3]};
+       });
       return {w:rect.width,h:rect.height,img,scroll:document.documentElement.scrollWidth};
    });
    assert.equal(artwork.img.length,3);
    assert(artwork.img.every(x=>x.ok&&x.width>0&&x.height>0),'invalid skin artwork on '+size.name);
+   assert(artwork.img.every(x=>x.alphaTopLeft<30),'skin artwork must have transparent edges: '+size.name+' '+JSON.stringify(artwork.img));
    assert(artwork.scroll<=size.width+2,'About art overflows on '+size.name);
    await page.screenshot({path:'qa-shots/'+size.name+'-about-en.png',fullPage:false});
    assert.equal(errors.length,0,errors.join(' ; '));
