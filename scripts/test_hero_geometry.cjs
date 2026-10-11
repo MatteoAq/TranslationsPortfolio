@@ -34,6 +34,29 @@ async function capture(page){
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.evaluate(()=>document.fonts.ready);
    await page.waitForSelector('.project-card');
+
+   // Full visual-asset audit: all 13 verified images must actually decode in
+   // Chromium, not merely appear as <img> URLs in the HTML source.
+   const coverAudit=await page.evaluate(async()=>{
+     const cards=[...document.querySelectorAll('.project-card')];
+     const imgs=[...document.querySelectorAll('.project-card .cover-photo')];
+     const results=await Promise.all(imgs.map(async el=>{
+       el.loading='eager';
+       try{await el.decode();}catch(_){}
+       return {src:el.getAttribute('src'),loaded:el.complete&&el.naturalWidth>=300&&el.naturalHeight>=180,
+         width:el.naturalWidth,height:el.naturalHeight};
+     }));
+     return {cards:cards.length,photos:imgs.length,results,
+       missing:[...cards].filter(el=>!el.querySelector('.cover-photo')).map(el=>el.querySelector('h3')?.textContent)};
+   });
+   assert.equal(coverAudit.cards,15,'catalog must contain 15 packs');
+   assert.equal(coverAudit.photos,13,'two packs intentionally have no verified photo');
+   assert(coverAudit.results.every(x=>x.src.startsWith('./assets/')&&x.loaded),
+     'Broken or undersized image: '+JSON.stringify(coverAudit.results.filter(x=>!x.loaded)));
+   assert.deepEqual(coverAudit.missing.sort(),['Create: Mekanized','Solo Leveling: OVERLOAD'].sort());
+   console.log('IMAGE AUDIT',size.name,JSON.stringify({total:coverAudit.cards,loaded:coverAudit.photos,
+     missing:coverAudit.missing,smallest:coverAudit.results.map(x=>[x.width,x.height]).sort((a,b)=>a[0]-b[0])[0]}));
+
    // Each portfolio item must go to its own verified translation product.
    const translationLinks=await page.locator('.project-card .translation-action').evaluateAll(els=>els.map(a=>a.href));
    assert.equal(translationLinks.length,15,'Missing per-pack translation links');
