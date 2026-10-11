@@ -318,61 +318,49 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
 @media(max-width:360px){.brand-type{display:none}}
 
 
-/* v12 – self-owned Minecraft skin poses, sourced from the official Mojang texture */
-.about-avatar{
+/* One authentic Sheiny__ skin render, with a quiet stage instead of props and rotation. */
+.about-avatar {
   position:relative;
-  width:min(100%,225px);
-  height:265px;
-  min-height:265px;
+  width:min(100%,235px);
+  height:280px;
+  min-height:280px;
+  overflow:visible;
   isolation:isolate;
   justify-self:center;
-  overflow:hidden;
-  border-radius:18px;
-  border:1px solid rgba(224,151,253,.22);
-  background:radial-gradient(ellipse at 50% 36%,#44265a 0%,#22142f 53%,#140f22 96%);
-  box-shadow:14px 17px 45px #0d0816;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  transform:none;
 }
-.about-avatar:before{
-  content:"";position:absolute;left:12%;right:12%;bottom:39px;height:30px;
-  border-radius:50%;background:rgba(7,2,15,.5);filter:blur(15px);
+.about-avatar::before {
+  content:"";
+  position:absolute;
+  inset:18% 6% 3%;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(151,67,188,.22),rgba(82,36,106,.07) 55%,transparent 75%);
+  filter:blur(16px);
 }
-.about-avatar .avatar-pose{
-  position:absolute;inset:0;
-  width:100%;height:100%;
+.about-avatar .avatar-portrait {
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:block;
   object-fit:contain;
-  object-position:center 42%;
-  padding:0 6px 12px;
-  opacity:0;
-  animation:avatar-pose-cycle 12s linear infinite;
-  pointer-events:none;
+  object-position:center;
+  padding:0;
+  opacity:1;
+  animation:none;
+  transform:none;
+  filter:drop-shadow(0 15px 13px rgba(4,2,8,.31));
 }
-.about-avatar .avatar-pose-lean{animation-delay:0s}
-.about-avatar .avatar-pose-quest{animation-delay:-8s}
-.about-avatar .avatar-pose-tech{animation-delay:-4s}
-@keyframes avatar-pose-cycle{
-  0%{opacity:1;transform:translateY(3px) scale(.98)}
-  4%{opacity:1;transform:translateY(0) scale(1)}
-  28%{opacity:1;transform:translateY(0) scale(1)}
-  33%,96%{opacity:0;transform:translateY(5px) scale(.98)}
-  100%{opacity:1;transform:translateY(3px) scale(.98)}
-}
-.about-avatar .avatar-caption{
-  position:absolute;left:15px;bottom:12px;z-index:2;
-  font-size:10px;letter-spacing:.17em;font-weight:900;
-  color:#eac5f9;font-family:ui-monospace,Consolas,monospace;
-}
-.about-avatar .avatar-caption span{color:#ef7cce}
 @media(max-width:860px){
- .about-avatar{width:185px;height:225px;min-height:225px}
+  .about-avatar{width:min(100%,205px);height:250px;min-height:250px}
 }
 @media(max-width:600px){
- .about-avatar{width:min(100%,225px);height:240px;min-height:240px;margin:0 auto 16px}
+  .about-avatar{width:min(100%,210px);height:250px;min-height:250px;margin:0 auto 12px}
 }
-@media(prefers-reduced-motion:reduce){
- .about-avatar .avatar-pose{animation:none;opacity:0}
- .about-avatar .avatar-pose-lean{opacity:1}
-}
-
 
 /* v13 – align section links to visible content, without scrolling to empty section padding.
    These margins also work for native anchors when JavaScript is disabled. */
