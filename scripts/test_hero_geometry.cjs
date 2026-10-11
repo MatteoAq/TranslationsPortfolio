@@ -110,6 +110,19 @@ async function capture(page){
    assert.equal(new Set(translationLinks).size,15,'Duplicate pack translation link');
    assert(translationLinks.every(url=>url.startsWith('https://kennyminecraft.ru/translations/')),'Generic landing page link detected');
    console.log('DIRECT TRANSLATION LINKS',size.name,translationLinks.length);
+   // The same 13 image DOM nodes must survive switching languages.
+   const tags=await page.evaluate(() => {
+      const imgs=[...document.querySelectorAll('#project-grid .project-card .cover-photo')];
+      imgs.forEach((el,i)=>el.dataset.qaIdentity='kept-'+i);
+      return imgs.map(el=>el.dataset.qaIdentity);
+   });
+   await page.locator('.lang-btn[data-lang="en"]').click();
+   const tagsAfter=await page.evaluate(() =>
+      [...document.querySelectorAll('#project-grid .project-card .cover-photo')]
+      .map(el=>el.dataset.qaIdentity));
+   assert.deepEqual(tagsAfter,tags,'Switching languages destroyed image elements');
+   console.log('RETAINED IMAGE NODES',size.name,tagsAfter.length);
+   await page.locator('.lang-btn[data-lang="ru"]').click();
 
    const ru=await capture(page);
    await page.screenshot({path:'qa-shots/'+size.name+'-ru.png',fullPage:false});

@@ -209,7 +209,7 @@ function applyStaticTranslations(){
 
 function cardMarkup(p, i){
   const img = p.img ? `<img class="cover-photo" loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" data-fallback="${p.imgFallback||''}" onerror="window.recoverPortfolioCover(this)" onload="window.portfolioCoverLoaded(this)">` : ''; 
-  return `<article class="project-card" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}">
+  return `<article class="project-card" data-pack-index="${i}" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}">
       <div class="card-cover"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${img}<span class="cover-label">${escapeHtml(t('card_label'))}</span></div>
       <div class="card-body">
         <span class="card-meta">${escapeHtml(p.genre[currentLang])}</span>
@@ -226,11 +226,32 @@ function render(){
     const haystack = normal([p.name, p.genre[currentLang], p.desc[currentLang]].join(' '));
     return (activeFilter === 'all' || p.theme === activeFilter) && (!q || haystack.includes(q));
   });
-  nodes.grid.innerHTML = matches.map(({p, i}) => cardMarkup(p, i)).join('');
+  // Preserve images across a language switch. The old implementation replaced every
+  // image on each click, exposing all cards to fresh network failures.
+  const existing = [...nodes.grid.querySelectorAll('.project-card')];
+  const sameCards = existing.length === matches.length &&
+    existing.every((card,i) => Number(card.dataset.packIndex) === matches[i].i);
+  if(!sameCards) {
+    nodes.grid.innerHTML = matches.map(({p, i}) => cardMarkup(p, i)).join('');
+  } else {
+    existing.forEach((card,i) => {
+      const p = matches[i].p;
+      card.querySelector('.cover-label').textContent = t('card_label');
+      card.querySelector('.card-meta').textContent = p.genre[currentLang];
+      const dl = card.querySelector('.card-downloads');
+      dl.title = t('downloads_asof');
+      dl.querySelector('strong').textContent = new Intl.NumberFormat(currentLang==='ru'?'ru-RU':'en-US',
+        {notation:'compact',maximumFractionDigits:2}).format(p.downloads);
+      dl.querySelector('small').textContent = t('downloads_label');
+      card.querySelector('.translation-action').textContent = t('translation_card_link');
+      const more = card.querySelector('.card-more');
+      more.textContent = t('card_more');
+      more.setAttribute('aria-label',t('card_more')+' '+p.name);
+    });
+  }
   nodes.noResults.hidden = matches.length > 0;
   nodes.count.textContent = projectCountLabel(matches.length);
 }
-
 function showProject(index){
   const p = projects[index]; if(!p) return;
   const modalImage = p.img ? `<img class="dialog-photo" src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="eager" decoding="async" onerror="window.recoverPortfolioCover(this)" onload="window.portfolioCoverLoaded(this)">` : '';
