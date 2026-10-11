@@ -26,3 +26,5 @@ jobs:
           git add assets/verified-waccyys-fantasia.webp assets/cover-audit.json index.html app.js
           git commit -m "Add official Fantasia gallery image and verify Opolis gallery source"
           git push origin HEAD:main
+
+# Retry after importer escaping fix.
