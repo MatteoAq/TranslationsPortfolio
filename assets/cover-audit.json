@@ -1,0 +1,82 @@
+{
+  "Dread Reborn": {
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/dread-arrenek/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/878/676/saved_2024-04-18_22.jpg",
+    "local_file": "verified-dread-reborn.webp",
+    "original_resolution": "1920x1080"
+  },
+  "Beyond Depth": {
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/beyond-depth/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/1225/924/skyarena-png.png",
+    "local_file": "verified-beyond-depth.webp",
+    "original_resolution": "1919x977"
+  },
+  "Whispers in the Void": {
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/whispers-in-the-void/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/949/348/halloween-is-coming-2.jpg",
+    "local_file": "verified-whispers.webp",
+    "original_resolution": "2560x1440"
+  },
+  "Society: Sunlit Valley": {
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/society-sunlit-valley/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/1345/664/2025-10-02_15.png",
+    "local_file": "verified-society.webp",
+    "original_resolution": "1381x992"
+  },
+  "Life in the village 4": {
+    "status": "official gallery, visually reviewed",
+    "source_page": "https://www.curseforge.com/minecraft/modpacks/life-in-the-village-4/gallery",
+    "original_image": "https://media.forgecdn.net/attachments/1113/182/dd34dndddd12d12n_2025-03-02_141428638-png.png",
+    "local_file": "verified-life-village.webp",
+    "original_resolution": "1440x576"
+  },
+  "Lucky World Invasion": {
+    "status": "attributed but unchanged",
+    "local_file": "cover-lucky-world-invasion.webp",
+    "source_note": "Promotional image of this pack at minecraft.fr"
+  },
+  "Project Genesis": {
+    "status": "attributed but unchanged",
+    "local_file": "cover-project-genesis.webp",
+    "source_note": "Biohazard Project Genesis author website"
+  },
+  "The Winter Rescue": {
+    "status": "attributed but unchanged",
+    "local_file": "winter-author.jpg",
+    "source_note": "TeamMoeg official modpack repository"
+  },
+  "Over Stars": {
+    "status": "attributed but unchanged",
+    "local_file": "cover-over-stars.webp",
+    "source_note": "Over Stars description, official CurseForge page"
+  },
+  "CABIN: Above and Beyond newer": {
+    "status": "attributed but unchanged",
+    "local_file": "cabin-logo.png",
+    "source_note": "ThePansmith CABIN official repository"
+  },
+  "Create: Stranded at Sea": {
+    "status": "attributed but unchanged",
+    "local_file": "cover-create-stranded-at-sea.webp",
+    "source_note": "Create Stranded at Sea official CurseForge gallery"
+  },
+  "Opolis Inc": {
+    "status": "needs origin reconfirmation",
+    "local_file": "cover-opolis-inc.webp",
+    "source_note": "CurseForge media attachment; source gallery not reverified"
+  },
+  "Create: Mekanized": {
+    "status": "cover removed – previous source is an unrelated generic Minecraft image",
+    "gallery": "https://www.curseforge.com/minecraft/modpacks/create-mekanized/gallery"
+  },
+  "Solo Leveling: OVERLOAD": {
+    "status": "no image until verified"
+  },
+  "waccyy's Fantasia": {
+    "status": "no image until verified"
+  }
+}
