@@ -1,7 +1,7 @@
 const {chromium}=require('playwright-core');
 const fs=require('fs');
 const assert=require('assert/strict');
-const url='https://matteoaq.github.io/TranslationsPortfolio/?asset-audit=20261011-v20';
+const url='https://matteoaq.github.io/TranslationsPortfolio/?asset-audit=20261011-v22';
 (async()=>{
   fs.mkdirSync('qa-shots',{recursive:true});
   const browser=await chromium.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
@@ -15,6 +15,16 @@ const url='https://matteoaq.github.io/TranslationsPortfolio/?asset-audit=2026101
       page.on('pageerror',e=>pageErrors.push(e.message));
       await page.goto(url,{waitUntil:'domcontentloaded',timeout:50000});
       await page.locator('.project-card').first().waitFor();
+      // The audit must inspect the newly deployed version, not a previous Pages cache.
+      let isLatest = false;
+      for(let n=0;n<15;n++){
+        isLatest=(await page.locator('#sheiny-inline-app-v22').count())===1;
+        if(isLatest)break;
+        await page.waitForTimeout(2400);
+        await page.reload({waitUntil:'domcontentloaded'});
+      }
+      assert(isLatest,'Published GitHub Pages has not deployed v22');
+      console.log('DEPLOYED VERSION',viewport.label,'v22');
       // Force images to load even when below the fold.
       const initial=await page.evaluate(async()=>{
         const cards=[...document.querySelectorAll('#project-grid .project-card')];

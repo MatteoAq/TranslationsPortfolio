@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - .github/workflows/check-published-images.yml
+      - index.html
+      - app.js
+      - styles.css
   workflow_dispatch:
 permissions:
   contents: read
