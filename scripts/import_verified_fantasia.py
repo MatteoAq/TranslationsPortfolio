@@ -23,7 +23,7 @@ for filename in ("index.html","app.js"):
  s=p.read_text("utf-8")
  token="const coverMap={"
  if s.count(token)!=1:raise SystemExit("Expected one coverMap in "+filename)
- s=s.replace(token,token+'"waccyy\\'s Fantasia":{"src":"'+replacement+'"},',1)
+ s=s.replace(token,token+json.dumps("waccyy's Fantasia")+':{"src":'+json.dumps(replacement)+'},',1)
  if filename=="index.html":
   static,sep,rest=s.partition("<script id=")
   if not sep:raise SystemExit("Inline script missing")
@@ -34,7 +34,7 @@ for filename in ("index.html","app.js"):
    card=m.group()
    if 'class="card-title">waccyy' not in card:continue
    if 'class="cover-photo"' in card: raise SystemExit("Fantasia cover already present")
-   image='<img class="cover-photo" src="'+replacement+'" alt="waccyy&#39;s Fantasia" loading="lazy" onerror="this.style.display=\\'none\\'">'
+   image='<img class="cover-photo" src="'+replacement+'" alt="waccyy&#39;s Fantasia" loading="lazy">'
    card=card.replace('<span class="cover-label">',image+'<span class="cover-label">',1)
    static=static[:m.start()]+card+static[m.end():]
    found=True
