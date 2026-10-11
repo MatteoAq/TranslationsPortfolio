@@ -172,3 +172,42 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
 
 /* Download count icon */
 .card-downloads .download-icon,.hero-stack-card .download-icon{display:inline-block;vertical-align:middle;width:16px;height:16px;flex:none;color:#e7a7f9}
+
+
+/* v9 – stable cards in both languages and locally stored cover art */
+.project-grid { align-items:stretch; }
+.project-card { height:100%; }
+.card-body {
+  height:177px !important;
+  min-height:177px !important;
+  max-height:177px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  overflow:hidden;
+  padding:14px 17px 15px !important;
+}
+.card-meta { white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:14px;line-height:14px;margin-bottom:6px !important; }
+.card-title { height:40px;min-height:40px;max-height:40px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin:0 0 6px !important;line-height:20px; }
+.card-downloads { flex:0 0 auto; margin:0 0 6px !important; max-width:100%; min-height:29px; }
+.card-downloads small {overflow:hidden;text-overflow:ellipsis;}
+.card-footer {display:flex !important;justify-content:space-between !important;align-items:end !important;gap:7px;min-height:21px;margin-top:auto !important;}
+.translation-action {font-size:10px;color:#efb0ff;font-weight:800;white-space:nowrap;line-height:18px;text-decoration:none}
+.translation-action:hover{text-decoration:underline;color:#fff;}
+.card-more {font-size:10px;white-space:nowrap;flex-shrink:0;}
+.card-cover .cover-photo[src$="life-village-4-logo.png"],
+.card-cover .cover-photo[src$="cabin-logo.png"] {
+  object-fit:contain !important;
+  padding:25px 22px !important;
+  filter:none !important;
+}
+.card-cover .cover-photo[src$="lucky-icon.png"] {
+  object-fit:contain !important;
+  padding:64px !important;
+  image-rendering:pixelated;
+}
+.card-cover .cover-photo {object-position:center center;}
+.dialog-links {display:flex;flex-wrap:wrap;gap:9px}
+@media(max-width:450px) {
+  .card-body {height:173px !important;min-height:173px !important;max-height:173px !important;}
+  .translation-action,.card-more {font-size:10px}
+}
