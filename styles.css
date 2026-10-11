@@ -372,3 +372,11 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
  .about-avatar .avatar-pose{animation:none;opacity:0}
  .about-avatar .avatar-pose-lean{opacity:1}
 }
+
+
+/* v13 – align section links to visible content, without scrolling to empty section padding.
+   These margins also work for native anchors when JavaScript is disabled. */
+html{scroll-padding-top:22px}
+#work,#approach,#about,#contact{scroll-margin-top:22px}
+#work > .section-head,#approach > .section-head{margin-top:0}
+@media(max-width:600px){html{scroll-padding-top:18px}}
