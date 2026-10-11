@@ -57,6 +57,53 @@ async function capture(page){
    console.log('IMAGE AUDIT',size.name,JSON.stringify({total:coverAudit.cards,loaded:coverAudit.photos,
      missing:coverAudit.missing,smallest:coverAudit.results.map(x=>[x.width,x.height]).sort((a,b)=>a[0]-b[0])[0]}));
 
+   // The previous bug was in the detail modal, not catalog cards.
+   // Validate all 15 modal windows on desktop and mobile, RU and EN.
+   async function testAllModals(lang){
+     if(size.name!=='desktop' && size.name!=='phone')return;
+     if(lang==='en')await page.locator('.lang-btn[data-lang="en"]').click();
+     for(let i=0;i<15;i++){
+       const card=page.locator('#project-grid .project-card').nth(i);
+       const name=await card.locator('.card-title').innerText();
+       const cardSrc=await card.locator('.cover-photo').count()
+         ? await card.locator('.cover-photo').getAttribute('src') : null;
+       await card.locator('.card-more').click();
+       const dlg=page.locator('#project-dialog');
+       await dlg.waitFor({state:'visible'});
+       const state=await page.evaluate(async()=>{
+         const dialog=document.querySelector('#project-dialog');
+         const el=dialog.querySelector('.dialog-photo');
+         if(el){try{await el.decode()}catch(e){}}
+         const imageRect=el?.getBoundingClientRect();
+         const wrapper=dialog.querySelector('.dialog-image').getBoundingClientRect();
+         const style=el?getComputedStyle(el):null;
+         return {
+           title:dialog.querySelector('#dialog-title')?.textContent,
+           photo:el?.getAttribute('src')||null,
+           valid:!el || (!!el.complete && el.naturalWidth>=300 && el.naturalHeight>=180
+                  && style.display!=='none' && style.visibility!=='hidden'
+                  && imageRect.width>100 && imageRect.height>80
+                  && imageRect.top>=wrapper.top-1 && imageRect.bottom<=wrapper.bottom+1),
+           naturalWidth:el?.naturalWidth||0,
+           naturalHeight:el?.naturalHeight||0
+         }
+       });
+       assert.equal(state.title,name,'Modal title mismatch for '+name);
+       assert.equal(state.photo,cardSrc,'Modal photo mismatch: '+name+' '+lang+' '+size.name);
+       assert(state.valid,'Modal image failed to render: '+JSON.stringify(state));
+       if(name==='Dread Reborn'||name==="waccyy's Fantasia"){
+         await dlg.screenshot({path:'qa-shots/modal-'+size.name+'-'+lang+'-'+(name==='Dread Reborn'?'dread':'fantasia')+'.png'});
+       }
+       await page.locator('#dialog-close').click();
+       await dlg.waitFor({state:'hidden'});
+     }
+     console.log('MODAL AUDIT',size.name,lang,'15/15; 13 decoded images, 2 intentional placeholders');
+     if(lang==='en')await page.locator('.lang-btn[data-lang="ru"]').click();
+   }
+   await testAllModals('ru');
+   await testAllModals('en');
+
+
    // Each portfolio item must go to its own verified translation product.
    const translationLinks=await page.locator('.project-card .translation-action').evaluateAll(els=>els.map(a=>a.href));
    assert.equal(translationLinks.length,15,'Missing per-pack translation links');

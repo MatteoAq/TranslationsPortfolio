@@ -235,7 +235,8 @@ function render(){
 
 function showProject(index){
   const p = projects[index]; if(!p) return;
-  const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter">${escapeHtml(p.abbr)}</span></div>`;
+  const modalImage = p.img ? `<img class="dialog-photo" src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="eager" decoding="async" onerror="this.hidden=true">` : '';
+  const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${modalImage}</div>`;
   const sourceLink = `<a class="dialog-link" href="${p.curseforge}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_original'))}</a>`;
   const translationLink = `<a class="dialog-link" href="${p.translationUrl||'https://kennyminecraft.ru/translations'}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('kenny_site_link'))}</a>`;
   nodes.dialogContent.innerHTML = `${img}

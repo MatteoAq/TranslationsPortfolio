@@ -10,7 +10,7 @@
   <meta property="og:description" content="Minecraft modpacks, quests, UI and mod localization.">
   <title>Sheiny – Minecraft localization</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=18">
+  <link rel="stylesheet" href="./styles.css?v=20">
   
 </head>
 <body>
@@ -191,7 +191,7 @@
     <div id="dialog-content"></div>
   </dialog>
 <nav class="mobile-dock" aria-label="Quick navigation"><a href="#top" data-section-link="top" data-i18n="quick_home">Главная</a><a href="#work" data-section-link="work" data-i18n="quick_projects">Проекты</a><a href="#approach" data-section-link="approach" data-i18n="quick_focus">Направления</a><a href="#about" data-section-link="about" data-i18n="quick_about">Обо мне</a><a href="#contact" data-section-link="contact" data-i18n="quick_contact">Связь</a></nav>
-<script id="sheiny-inline-app-v16">
+<script id="sheiny-inline-app-v20">
 'use strict';
 
 const projects = [
@@ -429,7 +429,8 @@ function render(){
 
 function showProject(index){
   const p = projects[index]; if(!p) return;
-  const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter">${escapeHtml(p.abbr)}</span></div>`;
+  const modalImage = p.img ? `<img class="dialog-photo" src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="eager" decoding="async" onerror="this.hidden=true">` : '';
+  const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${modalImage}</div>`;
   const sourceLink = `<a class="dialog-link" href="${p.curseforge}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_original'))}</a>`;
   const translationLink = `<a class="dialog-link" href="${p.translationUrl||'https://kennyminecraft.ru/translations'}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('kenny_site_link'))}</a>`;
   nodes.dialogContent.innerHTML = `${img}
@@ -624,7 +625,6 @@ function initSectionQuickNav(){
   schedule();
 }
 initSectionQuickNav();
-
 </script>
 </body>
 </html>
