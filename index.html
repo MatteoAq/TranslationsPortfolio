@@ -10,7 +10,7 @@
   <meta property="og:description" content="Minecraft modpacks, quests, UI and mod localization.">
   <title>Sheiny – Minecraft localization</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=9">
+  <link rel="stylesheet" href="./styles.css?v=11">
   
 </head>
 <body>
@@ -18,7 +18,7 @@
   <a class="skip-link" href="#work">Skip to projects</a>
   <div class="site-shell" id="top">
     <header class="site-header container">
-      <a class="wordmark" href="#top" aria-label="Sheiny home"><span class="brand-symbol">s<span>.</span></span><span>sheiny<span class="brand-dot">.</span></span></a>
+      <a class="wordmark" href="#top" aria-label="Sheiny – главная"><span class="brand-name">SHEINY<span class="brand-underscores">__</span></span><span class="brand-type" aria-hidden="true">MC / RU</span></a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="#work" data-i18n="nav_projects">Projects</a>
         <a href="#approach" data-i18n="nav_approach">What I do</a>
@@ -36,7 +36,7 @@
     <main>
       <section class="hero container" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-i18n="hero_eyebrow">INDEPENDENT MINECRAFT LOCALIZER</span></div>
+          <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-i18n="hero_eyebrow">MINECRAFT LOCALIZATION</span></div>
           <h1 id="hero-title" data-i18n-html="hero_title">Making Minecraft speak <em>Russian.</em></h1>
           <p class="hero-desc" data-i18n="hero_desc">I localize modpacks, mods, quests and interfaces for Russian-speaking players.</p>
           <div class="hero-actions">
@@ -150,11 +150,12 @@
 
       <section class="section container about-section" id="about" aria-labelledby="about-title">
         <div class="about-card">
-          <div class="about-symbol" aria-hidden="true">s<span>.</span></div>
+          <div class="about-symbol" aria-hidden="true"><span class="about-glyph">RU<span class="about-glyph-separator">/</span>EN</span></div>
           <div class="about-content">
             <div class="section-overline"><span data-i18n="about_overline">ABOUT</span></div>
             <h2 id="about-title" data-i18n-html="about_title">Sheiny <span>– Minecraft localization.</span></h2>
             <p data-i18n="about_desc">I work on Russian localization for Minecraft projects, mostly modpacks and related UI.</p>
+            <p class="community-note" data-i18n="community_note">I am also a member of NoToxicCommunity.</p>
             <div class="rtf-proof">
               <div><span class="proof-mark">✦</span> <strong data-i18n="rtf_title">RTF Extension</strong></div>
               <p data-i18n="rtf_desc">I also have my own translations in RTF Extension.</p>
@@ -188,7 +189,7 @@
     <div id="dialog-content"></div>
   </dialog>
 <nav class="mobile-dock" aria-label="Quick navigation"><a href="#top" data-section-link="top" data-i18n="quick_home">Главная</a><a href="#work" data-section-link="work" data-i18n="quick_projects">Проекты</a><a href="#approach" data-section-link="approach" data-i18n="quick_focus">Направления</a><a href="#about" data-section-link="about" data-i18n="quick_about">Обо мне</a><a href="#contact" data-section-link="contact" data-i18n="quick_contact">Связь</a></nav>
-<script id="sheiny-inline-app-v9">
+<script id="sheiny-inline-app-v11">
 'use strict';
 
 const projects = [
@@ -295,7 +296,7 @@ const UI = {
     metaTitle:'Sheiny – переводы Minecraft',
     htmlLang:'ru',
     quick_home:'Главная',quick_projects:'Проекты',quick_focus:'Направления',quick_about:'Обо мне',quick_contact:'Связь',nav_projects:'Проекты', nav_approach:'Что я делаю', nav_about:'Обо мне', header_contact:'Написать',
-    hero_eyebrow:'НЕЗАВИСИМЫЙ ЛОКАЛИЗАТОР MINECRAFT',
+    hero_eyebrow:'ЛОКАЛИЗАЦИЯ MINECRAFT',
     hero_title:'Чтобы Minecraft говорил <em>по-русски.</em>',
     hero_desc:'Перевожу модпаки, моды, квесты и интерфейсы на русский язык.',
     hero_action_primary:'Посмотреть работы', hero_action_secondary:'Что локализую',
@@ -311,7 +312,7 @@ const UI = {
     service_quests_title:'Квесты и книги', service_quests_desc:'Квестбуки, руководства и большой игровой текст.',
     service_ui_title:'Интерфейсы', service_ui_desc:'FancyMenu, HUD и другие текстовые элементы UI.',
     service_code_title:'KubeJS и нестандартные случаи', service_code_desc:'Скрипты, динамические названия и строки вне lang-файлов.',
-    about_overline:'ОБО МНЕ', about_title:'Sheiny <span>– локализация Minecraft.</span>', about_desc:'Занимаюсь русской локализацией Minecraft-проектов: в основном сборок и связанных интерфейсов.',
+    about_overline:'ОБО МНЕ', about_title:'Sheiny <span>– локализация Minecraft.</span>', about_desc:'Занимаюсь русской локализацией Minecraft-проектов: в основном сборок и связанных интерфейсов.',community_note:'Также состою в NoToxicCommunity.',
     rtf_title:'RTF Extension', rtf_desc:'У меня также есть свои переводы в RTF Extension.',
     contact_overline:'СВЯЗЬ', contact_title:'Нужна русская <span>локализация?</span>', contact_desc:'Можно написать в Telegram или Discord.', copy_label:'Копировать',
     footer_text:'Портфолио локализации Minecraft · 2026', footer_top:'Наверх ↑',
@@ -323,7 +324,7 @@ const UI = {
     metaTitle:'Sheiny – Minecraft localization',
     htmlLang:'en',
     quick_home:'Home',quick_projects:'Projects',quick_focus:'Focus',quick_about:'About',quick_contact:'Contact',nav_projects:'Projects', nav_approach:'What I do', nav_about:'About', header_contact:'Contact',
-    hero_eyebrow:'INDEPENDENT MINECRAFT LOCALIZER',
+    hero_eyebrow:'MINECRAFT LOCALIZATION',
     hero_title:'Making Minecraft speak <em>Russian.</em>',
     hero_desc:'I localize modpacks, mods, quests and interfaces for Russian-speaking players.',
     hero_action_primary:'View projects', hero_action_secondary:'What I localize',
@@ -339,7 +340,7 @@ const UI = {
     service_quests_title:'Quests and books', service_quests_desc:'Questbooks, guides and long-form in-game text.',
     service_ui_title:'Interfaces', service_ui_desc:'FancyMenu screens, HUDs and other text-heavy UI pieces.',
     service_code_title:'KubeJS and custom cases', service_code_desc:'Scripts, dynamic names and text outside lang files.',
-    about_overline:'ABOUT', about_title:'Sheiny <span>– Minecraft localization.</span>', about_desc:'I work on Russian localization for Minecraft projects, mostly modpacks and related UI.',
+    about_overline:'ABOUT', about_title:'Sheiny <span>– Minecraft localization.</span>', about_desc:'I work on Russian localization for Minecraft projects, mostly modpacks and related UI.',community_note:'I am also a member of NoToxicCommunity.',
     rtf_title:'RTF Extension', rtf_desc:'I also have my own translations in RTF Extension.',
     contact_overline:'CONTACT', contact_title:'Need Russian <span>localization?</span>', contact_desc:'Telegram or Discord – both are fine.', copy_label:'Copy',
     footer_text:'Minecraft localization portfolio · 2026', footer_top:'Back to top ↑',
