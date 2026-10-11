@@ -1,0 +1,34 @@
+name: Hero bilingual geometry test
+on:
+  push:
+    paths:
+      - index.html
+      - styles.css
+      - app.js
+      - scripts/test_hero_geometry.cjs
+      - .github/workflows/test-hero-geometry.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser testing runtime
+        run: npm install --no-save --no-package-lock playwright-core@1.57.0
+      - name: Run local server and verify both languages
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sheiny-http.log 2>&1 &
+          sleep 2
+          node scripts/test_hero_geometry.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hero-ru-en-comparison
+          path: qa-shots/
+          retention-days: 7
