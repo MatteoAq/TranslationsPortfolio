@@ -194,13 +194,13 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
 .translation-action {font-size:10px;color:#efb0ff;font-weight:800;white-space:nowrap;line-height:18px;text-decoration:none}
 .translation-action:hover{text-decoration:underline;color:#fff;}
 .card-more {font-size:10px;white-space:nowrap;flex-shrink:0;}
-.card-cover .cover-photo[src$="life-village-4-logo.png"],
-.card-cover .cover-photo[src$="cabin-logo.png"] {
+.card-cover .cover-photo[src*="/life-village-4-logo.png"],
+.card-cover .cover-photo[src*="/cabin-logo.png"] {
   object-fit:contain !important;
   padding:25px 22px !important;
   filter:none !important;
 }
-.card-cover .cover-photo[src$="lucky-icon.png"] {
+.card-cover .cover-photo[src*="/lucky-icon.png"] {
   object-fit:contain !important;
   padding:64px !important;
   image-rendering:pixelated;
@@ -375,3 +375,7 @@ html{scroll-padding-top:22px}
 .dialog-image .dialog-photo {display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
 .dialog-image .dialog-photo[hidden] {display:none;}
 .project-dialog {scrollbar-color:#715283 #1b1326; scrollbar-width:thin;}
+
+/* v21: a transient asset error must not leave a permanently empty cover. */
+.card-cover .cover-letter:has(+ img.cover-unavailable){display:block!important;}
+.card-cover img.cover-unavailable,.dialog-image img.cover-unavailable{opacity:0!important;}
