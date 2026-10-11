@@ -1,18 +1,28 @@
-import requests,re,json
-from urllib.parse import urljoin
+import re,json,requests,xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
-b="https://kennyminecraft.ru"
-s=requests.Session();s.headers.update({"User-Agent":"Mozilla/5.0"})
-for p in ["/","/robots.txt","/sitemap.xml","/catalog","/catalog/","/translations","/translation","/all-translations","/all_of_aeronautics/","/translations/biohazard-project-genesis-the-ultimate-apocalypse"]:
+from urllib.parse import urljoin
+base="https://kennyminecraft.ru"
+session=requests.Session()
+session.headers.update({"User-Agent":"Mozilla/5.0 (Sheiny localization portfolio; link checker)"})
+response=session.get(base+"/sitemap.xml",timeout=25);response.raise_for_status()
+sitemap=ET.fromstring(response.content)
+locs=[el.text for el in sitemap.iter() if el.tag.endswith('loc') and el.text]
+translations=[s for s in locs if '/translations/' in s]
+print("SITEMAP-COUNT",len(locs),"TRANSLATIONS",len(translations))
+for u in translations:
  try:
-  r=s.get(b+p,timeout=22)
-  print("PAGE",p,r.status_code,"LENGTH",len(r.content),"FINAL",r.url)
-  if r.status_code!=200:continue
-  if p=="/robots.txt" or "sitemap" in p:print("BODY",r.text[:2500]);continue
-  so=BeautifulSoup(r.text,"html.parser")
-  print("TITLE",so.title.text.strip() if so.title else "none")
-  print("LINKS",json.dumps([{"href":urljoin(r.url,x.get("href","")),"txt":x.get_text(" ",strip=True)[:75]} for x in so.select("a[href]")][:140],ensure_ascii=False))
-  print("SCRIPTS",json.dumps([urljoin(r.url,x.get("src")) for x in so.select("script[src]")][:60]))
-  print("IMAGES",json.dumps([urljoin(r.url,x.get("src")) for x in so.select("img[src]")][:18]))
-  if p=="/":print("RAW-MATCHES",json.dumps(re.findall(r'[^"]*translations[^"]*',r.text,re.I)[:80],ensure_ascii=False))
- except Exception as e:print("ERROR",p,repr(e))
+  r=session.get(u,timeout=16)
+  title=BeautifulSoup(r.text,'html.parser').title
+  print("TRANSLATION",r.status_code,u,"TITLE",title.get_text(' ',strip=True)[:130] if title else "")
+ except Exception as e:print("ERROR",u,repr(e))
+print("OTHER-RELATED")
+for u in locs:
+ if not '/translations/' in u and any(p in u.lower() for p in ['aeronautics','create','rtf','about']):
+  print(u)
+a=session.get(base+"/all_of_aeronautics/",timeout=25)
+soup=BeautifulSoup(a.text,'html.parser')
+for img in soup.select('img[src]'):
+ src=urljoin(a.url,img['src'])
+ if any(w in (src+' '+img.get('alt','')).lower() for w in ['team','crew','skin','render','member','avatar','character','person','pers','staff']):
+  print("AERO-PERSON",src,"ALT",img.get('alt'))
+print("AERO-IMAGES",json.dumps([{'src':urljoin(a.url,x['src']),'alt':x.get('alt',''),'width':x.get('width'),'height':x.get('height')} for x in soup.select('img[src]')][:40],ensure_ascii=False))
