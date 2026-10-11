@@ -1,24 +1,44 @@
 import {SkinViewer} from 'skinview3d';
 import * as THREE from 'three';
 
-const styles = {
- grass: { right:0x6e4d31,left:0x6a4327,top:0x5aa25a,front:0x785437,back:0x745235,bottom:0x58432b},
- stone: {right:0x767d90,left:0x657189,top:0x9ca2b2,front:0x858ca3,back:0x707990,bottom:0x697084},
- copper:{right:0xa55f3f,left:0x865132,top:0xcd8c5b,front:0xb97946,back:0x975a39,bottom:0x865132}
-};
+
+function buildTexture(style,face,seed){
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=16;
+  const ctx=canvas.getContext('2d'); let st=seed;
+  const rand=()=>{st=(st*1664525+1013904223)>>>0;return st/4294967296};
+  const base={grass:[102,76,49],stone:[124,129,144],copper:[171,103,64]}[style];
+  for(let y=0;y<16;y++) for(let x=0;x<16;x++){
+    const v=(rand()-.5)*55, shade=(x+y)%5===0?-8:0;
+    let c=base.map(n=>Math.max(15,Math.min(245,Math.round(n+v+shade))));
+    if(style==='grass' && (face===2 || (face!==3 && y<2+(x%3===0?1:0)))){
+      c=[72+rand()*39,124+rand()*49,48+rand()*20].map(n=>Math.round(n));
+    } else if(style==='stone' && rand()>.91){
+      c=c.map(n=>Math.min(245,n+20));
+    } else if(style==='copper' && rand()>.91){
+      c=[65+rand()*35,131+rand()*30,122+rand()*20].map(n=>Math.round(n));
+    }
+    ctx.fillStyle='rgb('+c.join(',')+')';ctx.fillRect(x,y,1,1);
+  }
+  const t=new THREE.CanvasTexture(canvas);
+  t.magFilter=THREE.NearestFilter;t.minFilter=THREE.NearestFilter;t.colorSpace=THREE.SRGBColorSpace;
+  return t;
+}
 function buildBlock(style,x,y){
- const c=styles[style],mesh=new THREE.Mesh(
+ const mesh=new THREE.Mesh(
    new THREE.BoxGeometry(11,11,11),
-   [c.right,c.left,c.top,c.bottom,c.front,c.back].map(color=>new THREE.MeshStandardMaterial({color,roughness:1}))
+   [0,1,2,3,4,5].map(i=>new THREE.MeshStandardMaterial({map:buildTexture(style,i,23+i*31),roughness:1}))
  );
  mesh.position.set(x,y,-1);
- const edges = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:0x17101b,transparent:true,opacity:.22}));
- mesh.add(edges);
- return mesh;
+ mesh.rotation.y=.32;
+ mesh.rotation.x=-.1;
+ const edges=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),
+   new THREE.LineBasicMaterial({color:0x221822,transparent:true,opacity:.36}));
+ mesh.add(edges);return mesh;
 }
+
 window.drawOfficialSkinPose=async function(pose){
  const canvas=document.getElementById('skin');
- const viewer=new SkinViewer({canvas,width:440,height:520,enableControls:false,preserveDrawingBuffer:true,background:null,renderPaused:true,zoom:1.15});
+ const viewer=new SkinViewer({canvas,width:440,height:520,enableControls:false,preserveDrawingBuffer:true,background:null,renderPaused:true,zoom:0.80});
  viewer.renderer.setClearColor(0x000000,0);
  await viewer.loadSkin('/assets/sheiny-official-skin.png');
  const body=viewer.playerObject.skin;
