@@ -342,6 +342,7 @@ function initSectionQuickNav(){
   };
   let frame=null;
   let destination=null;
+  let explicitSelection=null;
   const absoluteTop=el=>el.getBoundingClientRect().top+window.scrollY;
   const maxScroll=()=>Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
   const setActive=id=>{
@@ -357,6 +358,13 @@ function initSectionQuickNav(){
     if(destination!==null){
       if(Math.abs(window.scrollY-destination)>5)return;
       destination=null;
+    }
+    if(explicitSelection){
+      if(Math.abs(window.scrollY-explicitSelection.y)<=5){
+        setActive(explicitSelection.id);
+        return;
+      }
+      explicitSelection=null;
     }
     const end=window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-24;
     if(end){setActive('contact');return;}
@@ -375,6 +383,7 @@ function initSectionQuickNav(){
     const element=anchors[id];
     const y=id==='top'?0:Math.max(0,Math.min(maxScroll(),absoluteTop(element)-22));
     destination=y;
+    explicitSelection={id,y};
     setActive(id);
     if(updateHash && window.location.hash!=='#'+id)history.pushState(null,'','#'+id);
     const motion=smooth&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -391,11 +400,21 @@ function initSectionQuickNav(){
       goTo(id);
     });
   });
-  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('scroll',()=>{
+    if(explicitSelection && destination===null && Math.abs(window.scrollY-explicitSelection.y)>5){
+      explicitSelection=null;
+    }
+    schedule();
+  },{passive:true});
   window.addEventListener('resize',schedule,{passive:true});
   for(const eventName of ['wheel','touchstart']){
-    window.addEventListener(eventName,()=>{destination=null;},{passive:true});
+    window.addEventListener(eventName,()=>{destination=null;explicitSelection=null;schedule();},{passive:true});
   }
+  window.addEventListener('keydown',event=>{
+    if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key)){
+      destination=null;explicitSelection=null;schedule();
+    }
+  });
   window.addEventListener('popstate',()=>{
     const id=decodeURIComponent(window.location.hash.slice(1))||'top';
     if(!goTo(id,false,false))schedule();

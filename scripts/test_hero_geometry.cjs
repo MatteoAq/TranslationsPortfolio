@@ -88,7 +88,10 @@ async function capture(page){
       assert(check.bottom>0&&check.top<check.viewport,'anchor did not reveal '+id+' on '+size.name+' '+JSON.stringify(check));
       if(id==='work'||id==='approach')assert(check.top>=-5&&check.top<=60,'anchor landed on blank padding for '+id+' on '+size.name+' '+JSON.stringify(check));
    }
-   await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
+   await page.evaluate(()=>{
+      window.dispatchEvent(new WheelEvent('wheel',{deltaY:190,bubbles:true}));
+      window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'});
+   });
    await page.waitForFunction(()=>[...document.querySelectorAll('[data-section-link="contact"]')].every(el=>el.classList.contains('active')));
    assert.equal(await page.locator(navSelector+' a[href="#contact"]').getAttribute('aria-current'),'location');
    // Deep linking and browser back navigation should preserve target alignment.
