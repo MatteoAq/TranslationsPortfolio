@@ -1,4 +1,4 @@
-name: Render original Sheiny Minecraft skin poses
+name: Render clean Sheiny portrait
 on:
   push:
     paths:
@@ -17,21 +17,19 @@ jobs:
           node-version: '22'
       - run: npm install --no-package-lock --no-save esbuild@0.25.5 skinview3d@3.4.2 three@0.156.1 playwright-core@1.57.0
       - run: npx esbuild scripts/skin-render-entry.js --bundle --format=iife --platform=browser --outfile=scripts/skin-render-bundle.js
-      - name: Render 3 poses using genuine Minecraft skin
+      - name: Render one natural pose without props
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sheiny-skin-server.log 2>&1 &
           sleep 2
           node scripts/render_sheiny_poses.cjs
-      - name: Save pose images
+      - name: Save portrait image
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/sheiny-pose-*.png
+          git add assets/sheiny-portrait.png
           if git diff --cached --quiet; then
-            echo "Pose images unchanged"
+            echo "Portrait unchanged"
           else
-            git commit -m "Render original Sheiny skin in three independent poses"
+            git commit -m "Render natural Sheiny portrait without blocks"
             git push origin HEAD:main
           fi
-
-# Re-render with verified framing and pixel-textured blocks.
