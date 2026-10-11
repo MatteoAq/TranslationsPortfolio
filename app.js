@@ -92,7 +92,7 @@ const projects = [
     source:'https://www.curseforge.com/minecraft/modpacks/beyond-depth',color:['#5f3f7a','#211c38'],abbr:'BD'
   }
 ];
-const restoredCovers={"Whispers in the Void":"https://media.forgecdn.net/attachments/1319/846/whispers-in-the-void-1.jpg","The Winter Rescue":"https://i.imgur.com/QYhDakk.jpeg","Society: Sunlit Valley":"https://media.forgecdn.net/attachments/1021/562/2024-11-19_21.png","Create: Stranded at Sea":"https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png","Lucky World Invasion":"https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg"};
+const restoredCovers={"Whispers in the Void":"./assets/whispers.webp","The Winter Rescue":"./assets/winter.webp","Society: Sunlit Valley":"./assets/society.webp","Create: Stranded at Sea":"https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png","Lucky World Invasion":"https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg"};
 for(const p of projects){p.img=restoredCovers[p.name]||p.img;}
 projects.sort((a,b)=>(b.downloads||0)-(a.downloads||0));
 
@@ -122,7 +122,7 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'У меня также есть свои переводы в RTF Extension.',
     contact_overline:'СВЯЗЬ', contact_title:'Нужна русская <span>локализация?</span>', contact_desc:'Можно написать в Telegram или Discord.', copy_label:'Копировать',
     footer_text:'Портфолио локализации Minecraft · 2026', footer_top:'Наверх ↑',
-    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний сборки',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',
+    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',
     dialog_contribution:'Мой вклад:', dialog_contribution_text:'работа над русской локализацией для KennnyMC.',
     dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Иллюстрации оригинальной сборки ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
   },
@@ -150,7 +150,7 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'I also have my own translations in RTF Extension.',
     contact_overline:'CONTACT', contact_title:'Need Russian <span>localization?</span>', contact_desc:'Telegram or Discord – both are fine.', copy_label:'Copy',
     footer_text:'Minecraft localization portfolio · 2026', footer_top:'Back to top ↑',
-    card_label:'Translation for KennnyMC',downloads_label:'pack downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',
+    card_label:'Translation for KennnyMC',downloads_label:'downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',
     dialog_contribution:'My role:', dialog_contribution_text:'Russian localization work for KennnyMC.',
     dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original pack gallery ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
   }
@@ -211,7 +211,7 @@ function cardMarkup(p, i){
       <div class="card-body">
         <span class="card-meta">${escapeHtml(p.genre[currentLang])}</span>
         <h3 class="card-title">${escapeHtml(p.name)}</h3>
-        <div class="card-downloads" title="${escapeHtml(t('downloads_asof'))}"><span aria-hidden="true">↓</span><strong>${escapeHtml(new Intl.NumberFormat(currentLang==='ru'?'ru-RU':'en-US',{notation:'compact',maximumFractionDigits:2}).format(p.downloads))}</strong> <small>${escapeHtml(t('downloads_label'))}</small></div>
+        <div class="card-downloads" title="${escapeHtml(t('downloads_asof'))}"><svg class="download-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><strong>${escapeHtml(new Intl.NumberFormat(currentLang==='ru'?'ru-RU':'en-US',{notation:'compact',maximumFractionDigits:2}).format(p.downloads))}</strong> <small>${escapeHtml(t('downloads_label'))}</small></div>
         <div class="card-footer"><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
       </div>
     </article>`;
