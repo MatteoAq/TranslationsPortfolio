@@ -1,0 +1,29 @@
+name: Inspect Aeronautics render style
+on:
+  push:
+    paths:
+      - .github/workflows/inspect-aeronautics.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright-core@1.57.0
+      - name: Capture official project site reference
+        run: |
+          mkdir -p qa-shots
+          node scripts/inspect_aeronautics.cjs
+      - name: Commit temporary QA image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa-shots/aeronautics-reference.jpg
+          git commit -m "Temporary reference for portrait QA"
+          git push origin HEAD:main
