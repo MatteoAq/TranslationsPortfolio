@@ -208,5 +208,27 @@ async function capture(page){
    console.log(size.name,JSON.stringify({ru:ru.cards.map(x=>({w:round(x.width),h:round(x.height)})),en:en.cards.map(x=>({w:round(x.width),h:round(x.height)})),art_ru:[round(ru.art.width),round(ru.art.height)],art_en:[round(en.art.width),round(en.art.height)],scroll_ru:ru.scrollWidth,scroll_en:en.scrollWidth}));
    await context.close();
   }
+   // Simulate a transient failure from GitHub Pages CDN, then verify automatic recovery.
+   const retryContext=await browser.newContext({viewport:{width:1440,height:900},locale:'ru-RU'});
+   try {
+     const retryPage=await retryContext.newPage();
+     let blocked=0; let sent=0;
+     await retryPage.route('**/assets/verified-dread-reborn.webp*',async route=>{
+       sent++;
+       if(blocked===0){blocked++;await route.abort('failed');}
+       else await route.continue();
+     });
+     await retryPage.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+     const target=retryPage.locator('.project-card').filter({hasText:'Dread Reborn'}).locator('.cover-photo');
+     await target.scrollIntoViewIfNeeded();
+     await retryPage.waitForFunction(()=>{
+       const card=[...document.querySelectorAll('.project-card')].find(el=>el.querySelector('h3')?.textContent==='Dread Reborn');
+       const img=card?.querySelector('img.cover-photo');
+       return img && img.complete && img.naturalWidth>300 && !img.classList.contains('cover-unavailable');
+     },{timeout:18000});
+     assert.equal(blocked,1,'Transient abort did not occur');
+     assert(sent>=2,'Cover image was never retried after temporary failure');
+     console.log('TRANSIENT IMAGE RECOVERY',JSON.stringify({blocked,requests:sent}));
+   } finally {await retryContext.close()}
  }finally{await browser.close()}
 })().catch(err=>{console.error(err.stack);process.exit(1)});
