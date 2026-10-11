@@ -94,6 +94,8 @@ const projects = [
 ];
 const restoredCovers={"Whispers in the Void":"./assets/whispers.webp","The Winter Rescue":"./assets/winter.webp","Society: Sunlit Valley":"./assets/society.webp","Create: Stranded at Sea":"https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png","Lucky World Invasion":"https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg"};
 for(const p of projects){p.img=restoredCovers[p.name]||p.img;}
+const coverMap={"Whispers in the Void":{"src":"./assets/whispers.webp"},"The Winter Rescue":{"src":"./assets/winter-author.jpg"},"Society: Sunlit Valley":{"src":"./assets/society-author.png"},"Life in the village 4":{"src":"./assets/life-village-4-logo.png"},"CABIN: Above and Beyond newer":{"src":"./assets/cabin-logo.png"},"Lucky World Invasion":{"src":"https://minecraft.fr/wp-content/uploads/2024/09/lucky-world-invasion-modpack-minecraft.jpg","fallback":"./assets/lucky-icon.png"},"Create: Stranded at Sea":{"src":"https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png"},"Beyond Depth":{"src":"https://media.forgecdn.net/attachments/1225/936/deeper-darker-gate-png.png"},"Project Genesis":{"src":"https://biohazard.voidcube.studio/assets/gallery/Image1.png"},"Over Stars":{"src":"https://www.bisecthosting.com/images/CF/Over_Stars/BH_Over_Stars_header.webp"},"Create: Mekanized":{"src":"https://mtxserv.com/uploads/cover/create-mekanized-minecraft-d624f70cff05e10deaa2d49593cbc582.jpg"},"Opolis Inc":{"src":"https://media.forgecdn.net/attachments/954/66/opolis_inc_1.png"},"Dread Reborn":{"src":"https://stickypiston.co/wp-content/uploads/dread-arrenek_twitter.jpg"}};
+for(const p of projects){const e=coverMap[p.name];if(e){p.img=e.src;p.imgFallback=e.fallback||''}}
 projects.sort((a,b)=>(b.downloads||0)-(a.downloads||0));
 
 
@@ -122,9 +124,9 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'У меня также есть свои переводы в RTF Extension.',
     contact_overline:'СВЯЗЬ', contact_title:'Нужна русская <span>локализация?</span>', contact_desc:'Можно написать в Telegram или Discord.', copy_label:'Копировать',
     footer_text:'Портфолио локализации Minecraft · 2026', footer_top:'Наверх ↑',
-    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',
+    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',translation_card_link:'Русификаторы ↗',
     dialog_contribution:'Мой вклад:', dialog_contribution_text:'работа над русской локализацией для KennnyMC.',
-    dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Иллюстрации оригинальной сборки ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
+    dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Оригинальная сборка ↗',kenny_site_link:'Русификаторы на сайте Кенни ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
   },
   en: {
     metaTitle:'Sheiny – Minecraft localization',
@@ -150,9 +152,9 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'I also have my own translations in RTF Extension.',
     contact_overline:'CONTACT', contact_title:'Need Russian <span>localization?</span>', contact_desc:'Telegram or Discord – both are fine.', copy_label:'Copy',
     footer_text:'Minecraft localization portfolio · 2026', footer_top:'Back to top ↑',
-    card_label:'Translation for KennnyMC',downloads_label:'downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',
+    card_label:'Translation for KennnyMC',downloads_label:'downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',translation_card_link:'Translations ↗',
     dialog_contribution:'My role:', dialog_contribution_text:'Russian localization work for KennnyMC.',
-    dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original pack gallery ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
+    dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original modpack ↗',kenny_site_link:'Translations at KennnyMC ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
   }
 };
 
@@ -205,14 +207,14 @@ function applyStaticTranslations(){
 }
 
 function cardMarkup(p, i){
-  const img = p.img ? `<img class="cover-photo" loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" onerror="this.style.display='none'">` : ''; 
+  const img = p.img ? `<img class="cover-photo" loading="lazy" alt="${escapeHtml(p.name)}" src="${p.img}" data-fallback="${p.imgFallback||''}" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute('data-fallback')}else this.style.display='none'">` : ''; 
   return `<article class="project-card" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}">
       <div class="card-cover"><span class="cover-letter" aria-hidden="true">${escapeHtml(p.abbr)}</span>${img}<span class="cover-label">${escapeHtml(t('card_label'))}</span></div>
       <div class="card-body">
         <span class="card-meta">${escapeHtml(p.genre[currentLang])}</span>
         <h3 class="card-title">${escapeHtml(p.name)}</h3>
         <div class="card-downloads" title="${escapeHtml(t('downloads_asof'))}"><svg class="download-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><strong>${escapeHtml(new Intl.NumberFormat(currentLang==='ru'?'ru-RU':'en-US',{notation:'compact',maximumFractionDigits:2}).format(p.downloads))}</strong> <small>${escapeHtml(t('downloads_label'))}</small></div>
-        <div class="card-footer"><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
+        <div class="card-footer"><a class="translation-action" href="https://kennyminecraft.ru/" target="_blank" rel="noopener noreferrer">${escapeHtml(t('translation_card_link'))}</a><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
       </div>
     </article>`;
 }
@@ -232,7 +234,7 @@ function showProject(index){
   const p = projects[index]; if(!p) return;
   const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter">${escapeHtml(p.abbr)}</span></div>`;
   const sourceLink = `<a class="dialog-link" href="${p.curseforge}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_original'))}</a>`;
-  const translationLink = '';
+  const translationLink = `<a class="dialog-link" href="https://kennyminecraft.ru/" target="_blank" rel="noopener noreferrer">${escapeHtml(t('kenny_site_link'))}</a>`;
   nodes.dialogContent.innerHTML = `${img}
     <div class="dialog-main">
       <div class="dialog-topic">${escapeHtml(p.genre[currentLang])}</div>
@@ -335,3 +337,4 @@ function initSectionQuickNav(){
  for(const id of ['top','work','approach','about','contact']){const node=id==='top'?document.querySelector('.hero'):document.getElementById(id);if(node)obs.observe(node)}
 }
 initSectionQuickNav();
+
