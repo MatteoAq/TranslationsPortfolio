@@ -97,6 +97,9 @@ for(const p of projects){p.img=restoredCovers[p.name]||p.img;}
 const coverMap={"Whispers in the Void":{"src":"./assets/whispers.webp"},"The Winter Rescue":{"src":"./assets/winter-author.jpg"},"Society: Sunlit Valley":{"src":"./assets/society-author.png"},"Life in the village 4":{"src":"./assets/life-village-4-logo.png"},"CABIN: Above and Beyond newer":{"src":"./assets/cabin-logo.png"},"Lucky World Invasion":{"src":"./assets/cover-lucky-world-invasion.webp","fallback":"./assets/lucky-icon.png"},"Create: Stranded at Sea":{"src":"./assets/cover-create-stranded-at-sea.webp"},"Beyond Depth":{"src":"./assets/cover-beyond-depth.webp"},"Project Genesis":{"src":"./assets/cover-project-genesis.webp"},"Over Stars":{"src":"./assets/cover-over-stars.webp"},"Create: Mekanized":{"src":"./assets/cover-create-mekanized.webp"},"Opolis Inc":{"src":"./assets/cover-opolis-inc.webp"},"Dread Reborn":{"src":"./assets/cover-dread-reborn.webp"}};
 for(const p of projects){const e=coverMap[p.name];if(e){p.img=e.src;p.imgFallback=e.fallback||''}}
 projects.sort((a,b)=>(b.downloads||0)-(a.downloads||0));
+const directTranslationLinks={"Whispers in the Void":"https://kennyminecraft.ru/translations/whispers-in-the-void-a-horror-adventure-quests-ecde","The Winter Rescue":"https://kennyminecraft.ru/translations/the-winter-rescue","Solo Leveling: OVERLOAD":"https://kennyminecraft.ru/translations/solo-leveling-overload","Society: Sunlit Valley":"https://kennyminecraft.ru/translations/society-sunlit-valley","Project Genesis":"https://kennyminecraft.ru/translations/biohazard-project-genesis-the-ultimate-apocalypse","Over Stars":"https://kennyminecraft.ru/translations/over-stars","Opolis Inc":"https://kennyminecraft.ru/translations/opolis-inc-cd6c","Lucky World Invasion":"https://kennyminecraft.ru/translations/lucky-world-invasion","Life in the village 4":"https://kennyminecraft.ru/translations/life-in-the-village-4","waccyy's Fantasia":"https://kennyminecraft.ru/translations/waccyy-s-fantasia","Dread Reborn":"https://kennyminecraft.ru/translations/dread-a-horror-survival-pack","Create: Stranded at Sea":"https://kennyminecraft.ru/translations/create-stranded-at-sea-8ece","Create: Mekanized":"https://kennyminecraft.ru/translations/create-mekanized","CABIN: Above and Beyond newer":"https://kennyminecraft.ru/translations/cabin-create-above-beyond-in-newer","Beyond Depth":"https://kennyminecraft.ru/translations/beyond-depth"};
+for(const p of projects)p.translationUrl=directTranslationLinks[p.name]||null;
+
 
 
 const UI = {
@@ -124,9 +127,9 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'У меня также есть свои переводы в RTF Extension.',
     contact_overline:'СВЯЗЬ', contact_title:'Нужна русская <span>локализация?</span>', contact_desc:'Можно написать в Telegram или Discord.', copy_label:'Копировать',
     footer_text:'Портфолио локализации Minecraft · 2026', footer_top:'Наверх ↑',
-    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',translation_card_link:'Русификаторы ↗',
+    card_label:'Перевод для KennnyMC',downloads_label:'скачиваний',downloads_asof:'Статистика CurseForge на 11.10.2026', card_status:'Русская локализация', card_more:'Подробнее ↗',translation_card_link:'Русификатор ↗',
     dialog_contribution:'Мой вклад:', dialog_contribution_text:'работа над русской локализацией для KennnyMC.',
-    dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Оригинальная сборка ↗',kenny_site_link:'Русификаторы на сайте Кенни ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
+    dialog_translation:'Скриншоты перевода у KennnyMC ↗', dialog_original:'Оригинальная сборка ↗',kenny_site_link:'Страница русификатора ↗', dialog_note:'Это персональное портфолио, не официальная страница сборки.'
   },
   en: {
     metaTitle:'Sheiny – Minecraft localization',
@@ -152,9 +155,9 @@ const UI = {
     rtf_title:'RTF Extension', rtf_desc:'I also have my own translations in RTF Extension.',
     contact_overline:'CONTACT', contact_title:'Need Russian <span>localization?</span>', contact_desc:'Telegram or Discord – both are fine.', copy_label:'Copy',
     footer_text:'Minecraft localization portfolio · 2026', footer_top:'Back to top ↑',
-    card_label:'Translation for KennnyMC',downloads_label:'downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',translation_card_link:'Translations ↗',
+    card_label:'Translation for KennnyMC',downloads_label:'downloads',downloads_asof:'CurseForge snapshot: Oct 11, 2026', card_status:'Russian localization', card_more:'Details ↗',translation_card_link:'Translation ↗',
     dialog_contribution:'My role:', dialog_contribution_text:'Russian localization work for KennnyMC.',
-    dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original modpack ↗',kenny_site_link:'Translations at KennnyMC ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
+    dialog_translation:'KennnyMC translation screenshots ↗', dialog_original:'Original modpack ↗',kenny_site_link:'Translation page ↗', dialog_note:'This is a personal portfolio page, not an official pack page.'
   }
 };
 
@@ -214,7 +217,7 @@ function cardMarkup(p, i){
         <span class="card-meta">${escapeHtml(p.genre[currentLang])}</span>
         <h3 class="card-title">${escapeHtml(p.name)}</h3>
         <div class="card-downloads" title="${escapeHtml(t('downloads_asof'))}"><svg class="download-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><strong>${escapeHtml(new Intl.NumberFormat(currentLang==='ru'?'ru-RU':'en-US',{notation:'compact',maximumFractionDigits:2}).format(p.downloads))}</strong> <small>${escapeHtml(t('downloads_label'))}</small></div>
-        <div class="card-footer"><a class="translation-action" href="https://kennyminecraft.ru/" target="_blank" rel="noopener noreferrer">${escapeHtml(t('translation_card_link'))}</a><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
+        <div class="card-footer"><a class="translation-action" href="${p.translationUrl||'https://kennyminecraft.ru/translations'}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('translation_card_link'))}</a><button class="card-more" type="button" data-project="${i}" aria-label="${escapeHtml(t('card_more'))} ${escapeHtml(p.name)}">${escapeHtml(t('card_more'))}</button></div>
       </div>
     </article>`;
 }
@@ -234,7 +237,7 @@ function showProject(index){
   const p = projects[index]; if(!p) return;
   const img = `<div class="dialog-image" style="--tile-a:${p.color[0]};--tile-b:${p.color[1]}"><span class="cover-letter">${escapeHtml(p.abbr)}</span></div>`;
   const sourceLink = `<a class="dialog-link" href="${p.curseforge}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('dialog_original'))}</a>`;
-  const translationLink = `<a class="dialog-link" href="https://kennyminecraft.ru/" target="_blank" rel="noopener noreferrer">${escapeHtml(t('kenny_site_link'))}</a>`;
+  const translationLink = `<a class="dialog-link" href="${p.translationUrl||'https://kennyminecraft.ru/translations'}" target="_blank" rel="noopener noreferrer">${escapeHtml(t('kenny_site_link'))}</a>`;
   nodes.dialogContent.innerHTML = `${img}
     <div class="dialog-main">
       <div class="dialog-topic">${escapeHtml(p.genre[currentLang])}</div>
