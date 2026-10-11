@@ -1,4 +1,4 @@
-name: Render clean Sheiny portrait
+name: Render natural Sheiny pose candidates
 on:
   push:
     paths:
@@ -17,19 +17,19 @@ jobs:
           node-version: '22'
       - run: npm install --no-package-lock --no-save esbuild@0.25.5 skinview3d@3.4.2 three@0.156.1 playwright-core@1.57.0
       - run: npx esbuild scripts/skin-render-entry.js --bundle --format=iife --platform=browser --outfile=scripts/skin-render-bundle.js
-      - name: Render one natural pose without props
+      - name: Render candidate Minecraft character poses
         run: |
-          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sheiny-skin-server.log 2>&1 &
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sheiny-render-http.log 2>&1 &
           sleep 2
           node scripts/render_sheiny_poses.cjs
-      - name: Save portrait image
+      - name: Save reference renders for quality review
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/sheiny-portrait.png
+          git add assets/sheiny-candidate-*.png
           if git diff --cached --quiet; then
-            echo "Portrait unchanged"
+            echo "No candidate updates"
           else
-            git commit -m "Render natural Sheiny portrait without blocks"
+            git commit -m "Render three naturally posed Sheiny character candidates"
             git push origin HEAD:main
           fi
