@@ -24,6 +24,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add qa-shots/aeronautics-reference.jpg
-          git commit -m "Capture Aeronautics pose reference for QA"
+          git add qa-shots/aero-*.jpg
+          git commit -m "Capture Aeronautics lower-section render reference for QA"
           git push origin HEAD:main
+
+# Review actual lower-page character poses.
