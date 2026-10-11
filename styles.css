@@ -169,3 +169,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffa2
 .card-cover .cover-letter{z-index:0}.card-cover .cover-label{z-index:3}
 .card-cover img.cover-photo[style*="display: none"]{display:none!important}
 .catalog-static-link{font-size:11px;font-weight:800;color:#efbbff;padding:5px 0}
+
+/* Download count icon */
+.card-downloads .download-icon,.hero-stack-card .download-icon{display:inline-block;vertical-align:middle;width:16px;height:16px;flex:none;color:#e7a7f9}
