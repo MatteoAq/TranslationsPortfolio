@@ -17,7 +17,7 @@ COVERS = {
     "over-stars": "https://www.bisecthosting.com/images/CF/Over_Stars/BH_Over_Stars_header.webp",
     "create-mekanized": "https://mtxserv.com/uploads/cover/create-mekanized-minecraft-d624f70cff05e10deaa2d49593cbc582.jpg",
     "opolis-inc": "https://media.forgecdn.net/attachments/954/66/opolis_inc_1.png",
-    "create-stranded-at-sea": "https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png",
+    "create-stranded-at-sea": "https://media.forgecdn.net/attachments/1315/126/create-stranded-at-sea-showcase-5-png.png",
 }
 
 session = requests.Session()
@@ -40,6 +40,8 @@ for slug, url in COVERS.items():
         target = ASSETS / f"cover-{slug}.webp"
         im.save(target, "WEBP", quality=83, method=6)
         saved[url] = f"./assets/{target.name}"
+        if slug == "create-stranded-at-sea":
+            saved["https://media.forgecdn.net/attachments/1076/193/create-stranded-at-sea-showcase-end.png"] = f"./assets/{target.name}"
         print(f"OK {slug}: {im.width}x{im.height}, {target.stat().st_size} bytes")
     except (requests.RequestException, OSError, UnidentifiedImageError, ValueError) as exc:
         print(f"SKIP {slug}: {type(exc).__name__}: {exc}")
