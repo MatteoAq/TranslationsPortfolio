@@ -34,6 +34,13 @@ async function capture(page){
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.evaluate(()=>document.fonts.ready);
    await page.waitForSelector('.project-card');
+   // Each portfolio item must go to its own verified translation product.
+   const translationLinks=await page.locator('.project-card .translation-action').evaluateAll(els=>els.map(a=>a.href));
+   assert.equal(translationLinks.length,15,'Missing per-pack translation links');
+   assert.equal(new Set(translationLinks).size,15,'Duplicate pack translation link');
+   assert(translationLinks.every(url=>url.startsWith('https://kennyminecraft.ru/translations/')),'Generic landing page link detected');
+   console.log('DIRECT TRANSLATION LINKS',size.name,translationLinks.length);
+
    const ru=await capture(page);
    await page.screenshot({path:'qa-shots/'+size.name+'-ru.png',fullPage:false});
    // Regression: the Russian "Проекты" button must reveal the portfolio heading,
